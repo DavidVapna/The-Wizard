@@ -4,13 +4,16 @@
 #include "RedHeels.h"
 #include "Block.h"
 #include "Dorothy.h"
+#include "RandomEnemy.h"
 //============================================================================
 using Key = std::pair<std::type_index, std::type_index>;
 //============================================================================
 MultiMethod::MultiMethod()
 {
-    m_collisionFuncs[Key(typeid(Dorothy), typeid(RedHeels))] = &MultiMethod::DorothyRedHeels;
-    m_collisionFuncs[Key(typeid(RedHeels), typeid(Dorothy))] = &MultiMethod::redHeelsDorothy;
+    m_collisionFuncs[Key(typeid(Dorothy ), typeid(RedHeels))] = &MultiMethod::DorothyRedHeels;
+    m_collisionFuncs[Key(typeid(RedHeels), typeid(Dorothy ))] = &MultiMethod::redHeelsDorothy;
+    m_collisionFuncs[Key(typeid(RandomEnemy), typeid(Block   ))] = &MultiMethod::RandomEnemyBlock;
+    m_collisionFuncs[Key(typeid(Block   ), typeid(RandomEnemy))] = &MultiMethod::BlockRandomEnemy;
 }
 //============================================================================
 void MultiMethod::DorothyRedHeels(GameObject* dorothy, GameObject* redHeels) const
@@ -30,8 +33,26 @@ void MultiMethod::redHeelsDorothy(GameObject* redHeels, GameObject* dorothy) con
     DorothyRedHeels(dorothy, redHeels);
 }
 //============================================================================
+void MultiMethod::RandomEnemyBlock(GameObject* enemy, GameObject* block) const
+{
+    RandomEnemy* theEnemy = static_cast<RandomEnemy*>(enemy);
+    Block* theBlock = static_cast<Block*>(block);
+    if (!theEnemy || !theBlock)
+    {
+        //throw...
+        std::cout << "baddd" << "HERO RED HEELS MULTIMETHOD SETT THROW!!!";
+    }
+    theEnemy->wallCollision();
+}
+//============================================================================
+void MultiMethod::BlockRandomEnemy(GameObject* block, GameObject* enemy) const
+{
+    RandomEnemyBlock(enemy, block);
+}
+//============================================================================
 //gets the reference for the singeltone collision map
-MultiMethod& MultiMethod::getInstance() {
+MultiMethod& MultiMethod::getInstance() 
+{
 	static MultiMethod colision;
 	return colision;
 }

@@ -20,10 +20,10 @@ void GameBoard::loadGame()
     {
         m_staticObjects.push_back(std::move(m_maps.createStaticObject(index, *m_world, m_mapIndex)));
     }
-    //for (int index = 0; index < m_maps.getMovingCount(m_mapIndex); index++)
-    //{
-    //    m_movingObjects.push_back(std::move(m_maps.createStaticObject(index, *m_world, m_mapIndex)));
-    //}
+    for (int index = 0; index < m_maps.getMovingCount(m_mapIndex); index++)
+    {
+        m_movingObjects.push_back(std::move(m_maps.createMovingObject(index, *m_world, m_mapIndex)));
+    }
 }
 //=============================================================================
 void GameBoard::draw()

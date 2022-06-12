@@ -31,8 +31,6 @@ void GameObject::setFixture(b2World* world, const sf::Vector2f& size)
 	m_body->CreateFixture(&FixtureDef);
 }
 //=============================================================================
-
-//=============================================================================
 sf::Vector2f GameObject::getPos() const
 {
 	return m_sprite.getPosition();

@@ -41,6 +41,7 @@ void Resources::setTextures()
 	m_textures.insert(TexturesPair((int)Textures::Dorothy, loadSfObj<sf::Texture>("Dorothy.png")));
 	m_textures.insert(TexturesPair((int)Textures::Hay, loadSfObj<sf::Texture>("Hay.jpg")));
 	m_textures.insert(TexturesPair((int)Textures::RedHeels, loadSfObj<sf::Texture>("RedHeels.png")));
+	m_textures.insert(TexturesPair((int)Textures::Mouse, loadSfObj<sf::Texture>("Mouse.png")));
 }
 //============================================================================
 //sets the butten len based on the string len

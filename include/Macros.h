@@ -110,6 +110,7 @@ enum class Textures
 	Hay,
 	RedHeels,
 	PauseBG,
+	Mouse,
 	
 	MaxTextures
 };

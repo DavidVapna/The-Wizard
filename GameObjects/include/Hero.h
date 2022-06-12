@@ -11,7 +11,6 @@ public:
 	virtual ~Hero() = default;
 
 //	virtual void update(const float& deltaTime) override;
-
 	Hero(Hero&&) = default;
 	Hero& operator=(Hero&&) = default;
 

@@ -41,6 +41,9 @@ private:
 	void redHeelsDorothy(GameObject* redHeels, GameObject* dorothy) const;
 	void DorothyRedHeels(GameObject* dorothy, GameObject* redHeels) const;
 
+	void RandomEnemyBlock(GameObject* enemy, GameObject* block) const;
+	void BlockRandomEnemy(GameObject* block, GameObject* enemy) const;
+
 	std::unordered_map<Key, CorrectFunc, ArgsHash<std::type_index>, KeyEqual<std::type_index>> m_collisionFuncs;
 };
 //============================================================================

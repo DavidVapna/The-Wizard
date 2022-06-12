@@ -5,5 +5,6 @@
 											  "Hero.cpp"
 											  "RedHeels.cpp"
 											  "Enemy.cpp"
+											  "RandomEnemy.cpp"
 											  "Dorothy.cpp"
 											  )

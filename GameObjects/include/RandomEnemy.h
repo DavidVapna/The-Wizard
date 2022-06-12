@@ -1,14 +1,17 @@
 //=============================================================================
 #pragma once
 //=============================================================================
-#include "MovingObject.h"
+#include "Enemy.h"
 //=============================================================================
-class Enemy : public MovingObject
+class RandomEnemy : public Enemy
 {
 public:
 
-	Enemy(b2World* world, int bodyT, const sf::Vector2f& pos, bool rotation, const sf::Vector2f& size, int gameObj);
-	virtual ~Enemy() = default;
+	RandomEnemy(b2World* world, int bodyT, const sf::Vector2f& pos, bool rotation, const sf::Vector2f& size, int gameObj);
+	void wallCollision();
+
+
 private:
+	static bool m_registerit;
 };
 //=============================================================================

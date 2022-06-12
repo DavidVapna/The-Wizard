@@ -1,14 +1,16 @@
 //=============================================================================
 #pragma once
 //=============================================================================
-#include "MovingObject.h"
+#include "Movement.h"
 //=============================================================================
-class Enemy : public MovingObject
+class RandomMovement : public Movement
 {
 public:
+	RandomMovement(sf::Sprite* sprite, b2Body* body);
+	void update(const float& deltaTime) override;
+	void wallColided();
 
-	Enemy(b2World* world, int bodyT, const sf::Vector2f& pos, bool rotation, const sf::Vector2f& size, int gameObj);
-	virtual ~Enemy() = default;
 private:
+	bool m_wallCollided;
 };
 //=============================================================================

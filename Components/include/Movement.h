@@ -16,9 +16,9 @@ public:
 	void setIdle();
 	Direction getDirection() const;
 
-
-private:
+protected:
 	Direction m_direction;
+private:
 	sf::Sprite* m_sprite;
 	b2Body* m_body;
 	float m_speed = 300.f;

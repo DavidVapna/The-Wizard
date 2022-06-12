@@ -33,12 +33,6 @@ void MovingObject::setAnimation(const sf::Vector2f& size, int theObject)
 	m_sprite.setScale(size.x / m_sprite.getTextureRect().width, size.y / m_sprite.getTextureRect().height);
 	m_sprite.setOrigin(m_sprite.getTextureRect().width / 2.f, m_sprite.getTextureRect().height / 2.f);
 }
-
-//=============================================================================
-void MovingObject::move(const float& deltaTime)
-{
-
-}
 //=============================================================================
 void MovingObject::update(const float& deltaTime)
 {
