@@ -1,0 +1,7 @@
+﻿configure_file ("CowardlyLion.png" ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file ("Dorothy.png" ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file ("Rat.png" ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file ("Scarecrow.png" ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file ("TinMan.png" ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file ("RedHeels.png" ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file ("Hay.jpg" ${CMAKE_BINARY_DIR} COPYONLY)

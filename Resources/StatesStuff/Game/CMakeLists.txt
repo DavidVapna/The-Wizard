@@ -1,0 +1,1 @@
+﻿configure_file ("GameLevel1BG.jpg" ${CMAKE_BINARY_DIR} COPYONLY)

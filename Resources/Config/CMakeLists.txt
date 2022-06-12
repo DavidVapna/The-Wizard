@@ -1,0 +1,1 @@
+﻿configure_file ("window.ini" ${CMAKE_BINARY_DIR} COPYONLY)
