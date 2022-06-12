@@ -1,15 +1,18 @@
 //=============================================================================
 #pragma once
 //=============================================================================
-#include "MovementComponent.h"
+#include "MovingObject.h"
 //=============================================================================
-class BasicMovement : public MovementComponent
+class Enemy : public MovingObject
 {
 public:
-	BasicMovement();
-	virtual ~BasicMovement() = default;
+
+	Enemy(b2World* world, int bodyT, const sf::Vector2f& pos, bool rotation, const sf::Vector2f& size, int gameObj);
+
 
 private:
+
+	static bool m_registerit;
 
 };
 //=============================================================================

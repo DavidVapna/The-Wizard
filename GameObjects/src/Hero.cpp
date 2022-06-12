@@ -1,5 +1,6 @@
 //============================================================================
 #include "Hero.h"
+#include "PlayerMovement.h"
 //============================================================================
 
 //============================================================================
@@ -8,6 +9,7 @@ Hero::Hero(b2World* world, int bodyT, const sf::Vector2f& pos,
 	:MovingObject(world, bodyT, pos, rotation, size, gameObj)
 {
 	m_body->GetUserData().pointer = reinterpret_cast<uintptr_t>(this);
+	m_moveComp = std::make_unique<PlayerMovement>(&m_sprite, m_body);
 }
 //============================================================================
 //void Hero::update(const float& deltaTime)

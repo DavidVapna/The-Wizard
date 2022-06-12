@@ -74,8 +74,10 @@ void MapData::setObjects(std::ifstream& data, std::string& streamLine, int map,
 //=============================================================================
 std::unique_ptr<Hero> MapData::createHero(b2World& world, int currMap)
 {
-    return   Factory<Hero>::create(m_hero[currMap].name, &world, m_hero[currMap].bodyType,
-        m_hero[currMap].startingPos, m_hero[currMap].rotation, m_hero[currMap].objectSize, m_hero[currMap].textureEnum);
+    return   Factory<Hero>::create(
+        m_hero[currMap].name, &world, m_hero[currMap].bodyType,
+        m_hero[currMap].startingPos, m_hero[currMap].rotation,
+        m_hero[currMap].objectSize, m_hero[currMap].textureEnum);
 }
 //=============================================================================
 std::unique_ptr<MovingObject> MapData::createMovingObject(int index, b2World& world, int currMap)
@@ -89,7 +91,6 @@ std::unique_ptr<MovingObject> MapData::createMovingObject(int index, b2World& wo
 //=============================================================================
 std::unique_ptr<StaticObject> MapData::createStaticObject(int index, b2World& world, int currMap)
 {
-
     return  Factory<StaticObject>::create(
         m_static[currMap][index].name, &world, m_static[currMap][index].bodyType,
         m_static[currMap][index].startingPos, m_static[currMap][index].rotation,
@@ -110,5 +111,10 @@ int MapData::getMovingCount(int currMap)
 int MapData::getNumOfMaps()
 {
     return m_numOfMaps;
+}
+//=============================================================================
+std::string MapData::getCurrHero(int currMap)
+{
+    return m_hero[currMap].name;
 }
 //=============================================================================

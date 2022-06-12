@@ -1,4 +1,4 @@
-﻿target_sources (${CMAKE_PROJECT_NAME} PRIVATE "MovementComponent.cpp"
-											  "AnimationComponent.cpp"
-											  "BasicMovement.cpp"
+﻿target_sources (${CMAKE_PROJECT_NAME} PRIVATE "Movement.cpp"
+											  "Animation.cpp"
+											  "PlayerMovement.cpp"
 											  )

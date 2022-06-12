@@ -2,15 +2,15 @@
 #pragma once
 //============================================================================
 #include "Direction.h"
-
 //============================================================================
-class MovementComponent
+class Movement
 {
 public:
-	MovementComponent(sf::Sprite* sprite, b2Body* body);
-	~MovementComponent();
-
-	void move(const float& deltaTime);
+	Movement(sf::Sprite* sprite, b2Body* body);
+	virtual ~Movement() = default;
+	
+	virtual void update(const float& deltaTime) = 0;
+	virtual void move(const float& deltaTime);
 	void jump(const float& deltaTime);
 	void setDirection(Direction dir);
 	void setIdle();

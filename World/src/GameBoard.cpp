@@ -1,5 +1,6 @@
 //=============================================================================
 #include "GameBoard.h"
+
 //=============================================================================
 GameBoard::GameBoard(sf::RenderWindow* window, b2World* world)
     :m_window(window), m_world(world), m_mapIndex(0)
@@ -13,7 +14,6 @@ void GameBoard::loadGame()
     {
         m_maps.loadMap(index);
     }
-
     m_hero = std::move(m_maps.createHero(*m_world, m_mapIndex));
 
     for (int index = 0; index < m_maps.getStaticCount(m_mapIndex); index++)
@@ -41,7 +41,6 @@ void GameBoard::draw()
 //=============================================================================
 void GameBoard::update(const float& deltaTime)
 {
-    m_hero->move(deltaTime);
     m_hero->update(deltaTime);
     for (auto& object : m_staticObjects)
     {

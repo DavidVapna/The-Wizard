@@ -2,7 +2,7 @@
 #pragma once
 //=============================================================================
 #include "GameObject.h"
-#include "MovementComponent.h"
+#include "Movement.h"
 //=============================================================================
 class MovingObject : public GameObject
 {
@@ -13,14 +13,19 @@ public:
 	virtual ~MovingObject() = default;
 	virtual void move(const float& deltaTime);
 	virtual void update(const float& deltaTime) override;
+
 	void setAnimation(const sf::Vector2f& size, int theObject) override;
 
 	MovingObject(MovingObject&&) = default;
 	MovingObject& operator=(MovingObject&&) = default;
 
 private:
-	MovementComponent m_moveComp;
+	virtual void updateAnimation(const float& deltaTime);
 
+protected:
+	std::unique_ptr<Movement> m_moveComp;
+
+private:
 };
 
 //=============================================================================

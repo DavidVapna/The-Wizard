@@ -1,12 +1,10 @@
 //============================================================================
 #pragma once
 //============================================================================
-
-
 #include"GameObject.h"
 //============================================================================
 using Key = std::pair< std::type_index, std::type_index>;
-
+//============================================================================
 template<class T>
 struct ArgsHash
 {
@@ -17,7 +15,7 @@ struct ArgsHash
 		return h1 ^ h2;
 	}
 };
-
+//============================================================================
 template < class T>
 struct KeyEqual
 {
@@ -33,14 +31,15 @@ public:
 	using CorrectFunc = void(MultiMethod::*)(GameObject* objectA, GameObject* objectB) const;
 	static MultiMethod& getInstance();
 	void handleCollision(GameObject* objectA, GameObject* objectB);
+
 private:
 	MultiMethod();
 	MultiMethod(const MultiMethod&) = default;
 	MultiMethod& operator=(const MultiMethod&) = default;
 
 
-	void HeroRedHeels(GameObject* redHeels, GameObject* hero) const;
-	void RedHeelsHero(GameObject* hero, GameObject* redHeels) const;
+	void redHeelsDorothy(GameObject* redHeels, GameObject* dorothy) const;
+	void DorothyRedHeels(GameObject* dorothy, GameObject* redHeels) const;
 
 	std::unordered_map<Key, CorrectFunc, ArgsHash<std::type_index>, KeyEqual<std::type_index>> m_collisionFuncs;
 };

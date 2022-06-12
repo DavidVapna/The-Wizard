@@ -3,19 +3,19 @@
 #include "Hero.h"
 #include "RedHeels.h"
 #include "Block.h"
+#include "Dorothy.h"
 //============================================================================
 using Key = std::pair<std::type_index, std::type_index>;
 //============================================================================
 MultiMethod::MultiMethod()
 {
-    m_collisionFuncs[Key(typeid(Hero), typeid(RedHeels))] = &MultiMethod::HeroRedHeels;
-    m_collisionFuncs[Key(typeid(RedHeels), typeid(Hero))] = &MultiMethod::RedHeelsHero;
+    m_collisionFuncs[Key(typeid(Dorothy), typeid(RedHeels))] = &MultiMethod::DorothyRedHeels;
+    m_collisionFuncs[Key(typeid(RedHeels), typeid(Dorothy))] = &MultiMethod::redHeelsDorothy;
 }
 //============================================================================
-void MultiMethod::HeroRedHeels(GameObject* hero, GameObject* redHeels) const
+void MultiMethod::DorothyRedHeels(GameObject* dorothy, GameObject* redHeels) const
 {
-    // To get the actual types and use them:
-    Hero* theHero = static_cast<Hero*>(hero);
+    Dorothy* theHero = static_cast<Dorothy*>(dorothy);
     RedHeels* theRedHeels = static_cast<RedHeels*>(redHeels);
     if (!theHero || !theRedHeels)
     {
@@ -25,9 +25,9 @@ void MultiMethod::HeroRedHeels(GameObject* hero, GameObject* redHeels) const
     theRedHeels->removed();
 }
 //============================================================================
-void MultiMethod::RedHeelsHero(GameObject* redHeels, GameObject* hero) const
+void MultiMethod::redHeelsDorothy(GameObject* redHeels, GameObject* dorothy) const
 {
-    HeroRedHeels(hero, redHeels);
+    DorothyRedHeels(dorothy, redHeels);
 }
 //============================================================================
 //gets the reference for the singeltone collision map

@@ -3,11 +3,11 @@
 //=============================================================================
 #include "Macros.h"
 //=============================================================================
-class Animation
+class AnimationComp
 {
 public:
 
-    Animation(sf::Sprite& sprite, const sf::Texture* texture ,float animTimer,
+    AnimationComp(sf::Sprite& sprite, const sf::Texture* texture ,float animTimer,
         const sf::Vector2i& frameStart, const sf::Vector2i& frames, sf::Vector2f size)
         :m_sprite(sprite), m_textureSheet(texture), m_animTimer(animTimer),
         m_timer(0.f), m_size(size), m_done(false)
@@ -47,7 +47,7 @@ public:
         m_currentRect = m_startRect;
     }
 
-    ~Animation() = default;
+    ~AnimationComp() = default;
 
 public:
     //members
@@ -63,11 +63,11 @@ public:
 };
 
 //=============================================================================
-class AnimationComponent
+class Animation
 {
 public:
-    AnimationComponent(sf::Sprite& sprite, const sf::Texture& texture);
-    ~AnimationComponent() = default;
+    Animation(sf::Sprite& sprite, const sf::Texture& texture);
+    ~Animation() = default;
 
     //functions
     void addAnimation(const std::string& key, float animTimer,
@@ -76,7 +76,7 @@ public:
 
 private:
     
-    std::map<std::string, std::unique_ptr<Animation>> m_animations;
+    std::map<std::string, std::unique_ptr<AnimationComp>> m_animations;
     sf::Sprite& m_sprite;
     const sf::Texture* m_textureSheet;
 };

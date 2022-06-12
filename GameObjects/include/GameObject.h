@@ -3,7 +3,7 @@
 //=============================================================================
 #include "Factory.h"
 #include "Resources.h"
-#include "AnimationComponent.h"
+#include "Animation.h"
 //=============================================================================
 class GameObject
 {
@@ -35,7 +35,7 @@ protected:
 
 	
 	bool m_removed;
-	std::unique_ptr<AnimationComponent> m_animation;
+	std::unique_ptr<Animation> m_animation;
 
 private:
 };

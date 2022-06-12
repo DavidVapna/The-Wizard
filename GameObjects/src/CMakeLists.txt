@@ -4,5 +4,6 @@
 											  "StaticObject.cpp"
 											  "Hero.cpp"
 											  "RedHeels.cpp"
+											  "Enemy.cpp"
 											  "Dorothy.cpp"
 											  )
