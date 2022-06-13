@@ -10,10 +10,11 @@ public:
 	static Resources& instance();
 	const sf::Texture& getTexture(int wantedTexture) const;
 	const sf::Font& getFont(int index) const;
-	void playMusic(int);
-	void playSound(int);
+	void playMusic(Sounds sound);
+	void playSound(Sounds sound);
 
 	const int getButLen(int index) const;
+	void stopMusic();
 
 
 private:
@@ -26,7 +27,6 @@ private:
 	void setFonts();
 	void setSounds();
 	void setButtonStrLengh();
-
 
 private:
 	std::unordered_map <int, sf::Texture> m_textures;

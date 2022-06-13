@@ -107,16 +107,18 @@ enum class Textures
 	Buttons,
 	CowardlyLion,
 	Dorothy,
-	Hay,
+	Block,
 	RedHeels,
 	PauseBG,
 	Mouse,
+	Glinda,
 	
 	MaxTextures
 };
 //=============================================================================
 enum class Sounds
 {
+	theme,
 
 	MaxSounds
 };
@@ -147,7 +149,9 @@ enum class Shape
 };
 //=============================================================================
 
-constexpr auto MUSIC_VOLUME = 10;
-constexpr auto EFFECTS_VOLUME = 10;
+//=============================================================================
+
+constexpr auto MUSIC_VOLUME = 7;
+constexpr auto EFFECTS_VOLUME = 5;
 
 //=============================================================================

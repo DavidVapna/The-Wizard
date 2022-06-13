@@ -39,17 +39,17 @@ void Resources::setTextures()
 	m_textures.insert(TexturesPair((int)Textures::Buttons, loadSfObj<sf::Texture>("Buttons.jpg")));
 	m_textures.insert(TexturesPair((int)Textures::CowardlyLion, loadSfObj<sf::Texture>("CowardlyLion.png")));
 	m_textures.insert(TexturesPair((int)Textures::Dorothy, loadSfObj<sf::Texture>("Dorothy.png")));
-	m_textures.insert(TexturesPair((int)Textures::Hay, loadSfObj<sf::Texture>("Hay.jpg")));
+	m_textures.insert(TexturesPair((int)Textures::Block, loadSfObj<sf::Texture>("Hay.jpg")));
 	m_textures.insert(TexturesPair((int)Textures::RedHeels, loadSfObj<sf::Texture>("RedHeels.png")));
 	m_textures.insert(TexturesPair((int)Textures::Mouse, loadSfObj<sf::Texture>("Mouse.png")));
+	m_textures.insert(TexturesPair((int)Textures::Glinda, loadSfObj<sf::Texture>("Glinda.png")));
 }
 //============================================================================
 //sets the butten len based on the string len
 void Resources::setButtonStrLengh() 
 {
-	/*
-	m_buttonStrLen.insert(ButtonPairStr(singlePlayer, strlen("single player")));
-	*/
+	return;
+	//m_buttonStrLen.insert(ButtonPairStr(singlePlayer, strlen("single player")));
 }
 //============================================================================
 
@@ -69,9 +69,8 @@ Resources& Resources::instance()
 //============================================================================
 void Resources::setSounds() 
 {
-	/*
-	m_sounds.insert(std::pair<int, sf::SoundBuffer>(checkPointSound,loadSfObj<sf::SoundBuffer>("checkPointSound.wav")));
-	*/
+	return;
+	//m_sounds.insert(std::pair<int, sf::SoundBuffer>((int)Sounds::theme, loadSfObj<sf::SoundBuffer>("theme.wav")));
 }
 //============================================================================
 const int Resources::getButLen(int index) const
@@ -89,25 +88,28 @@ const sf::Font& Resources::getFont(int index) const
 	throw std::out_of_range("Font not found.");
 }
 //============================================================================
-void Resources::playMusic(int type) 
+void Resources::playMusic(Sounds sound)
 {
-	//switch (type) 
-	//{
-	//case menu:
-	//	m_music.openFromFile("menu.wav");
-	//	break;
-
-	//}
+	switch (sound)
+	{
+	case Sounds::theme:
+		m_music.openFromFile("theme.wav");
+		break;
+	}
 	m_music.play();
 	m_music.setLoop(true);
 }
 //============================================================================
-void Resources::playSound(int pos) 
+void Resources::playSound(Sounds sound)
 {
-	m_sound.setBuffer(m_sounds.find(pos)->second);
+	m_sound.setBuffer(m_sounds.find((int)sound)->second);
 	m_sound.play();
 }
 //============================================================================
+void Resources::stopMusic()
+{
+	m_music.stop();
+}
 //============================================================================
 //============================================================================
 //============================================================================

@@ -8,8 +8,8 @@
 //=============================================================================
 struct Object 
 {
-	std::string type, name;
-	int bodyType, textureEnum;
+	std::string type, name, textureEnum;
+	int bodyType;
 	sf::Vector2f startingPos, objectSize;
 	bool rotation;
 };
@@ -26,7 +26,7 @@ public:
 	int getMovingCount(int currMap);
 	int getNumOfMaps();
 	std::string getCurrHero(int currMap);
-
+	void mapStringToInt();
 
 	std::unique_ptr<Hero> createHero(b2World& world, int currMap);
 	std::unique_ptr<MovingObject> createMovingObject(int index, b2World& world, int currMap);
@@ -46,4 +46,5 @@ private:
 	std::vector<Object> m_hero;
 	std::vector<std::vector<Object>> m_moving;
 	std::vector<std::vector<Object>> m_static;
+	std::unordered_map<std::string, int> m_stringTextures;
 };

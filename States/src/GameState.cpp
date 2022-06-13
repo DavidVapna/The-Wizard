@@ -17,6 +17,7 @@ GameState::GameState(sf::RenderWindow* window, std::stack<std::unique_ptr<State>
     setBoundries();
     setBG();
     m_gameBoard.loadGame();
+    Resources::instance().playMusic(Sounds::theme);
 }
 //=============================================================================
 GameState::~GameState()
@@ -110,7 +111,9 @@ void GameState::updateInput(const float& deltaTime)
 {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape))
     {
-        this->m_end = true; return;
+        this->m_end = true;
+        Resources::instance().stopMusic();
+        return;
     }
     for (auto event = sf::Event{}; m_window->pollEvent(event);)
     {

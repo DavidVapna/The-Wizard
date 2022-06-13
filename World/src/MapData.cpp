@@ -24,6 +24,7 @@ void MapData::loadMap(int map)
     m_static.push_back(staticObjs);
     m_moving.push_back(movingObjs);
 
+    mapStringToInt();
 }
 //=============================================================================
 void MapData::loadFromFile(std::ifstream& data, std::string& string, int map,
@@ -72,12 +73,22 @@ void MapData::setObjects(std::ifstream& data, std::string& streamLine, int map,
 }
 
 //=============================================================================
+void MapData::mapStringToInt()
+{
+    m_stringTextures["Glinda"] = (int)Textures::Glinda;
+    m_stringTextures["Dorothy"] = (int)Textures::Dorothy;
+    m_stringTextures["Block"] = (int)Textures::Block;
+    m_stringTextures["RedHeels"] = (int)Textures::RedHeels;
+    m_stringTextures["Mouse"] = (int)Textures::Mouse;
+}
+//=============================================================================
 std::unique_ptr<Hero> MapData::createHero(b2World& world, int currMap)
 {
     return   Factory<Hero>::create(
         m_hero[currMap].name, &world, m_hero[currMap].bodyType,
         m_hero[currMap].startingPos, m_hero[currMap].rotation,
-        m_hero[currMap].objectSize, m_hero[currMap].textureEnum);
+        m_hero[currMap].objectSize,
+        m_stringTextures.find(m_hero[currMap].textureEnum)->second);
 }
 //=============================================================================
 std::unique_ptr<MovingObject> MapData::createMovingObject(int index, b2World& world, int currMap)
@@ -85,7 +96,8 @@ std::unique_ptr<MovingObject> MapData::createMovingObject(int index, b2World& wo
     return  Factory<MovingObject>::create(
         m_moving[currMap][index].name, &world, m_moving[currMap][index].bodyType,
         m_moving[currMap][index].startingPos, m_moving[currMap][index].rotation,
-        m_moving[currMap][index].objectSize, m_moving[currMap][index].textureEnum
+        m_moving[currMap][index].objectSize,
+        m_stringTextures.find(m_moving[currMap][index].textureEnum)->second
     );
 }
 //=============================================================================
@@ -94,7 +106,8 @@ std::unique_ptr<StaticObject> MapData::createStaticObject(int index, b2World& wo
     return  Factory<StaticObject>::create(
         m_static[currMap][index].name, &world, m_static[currMap][index].bodyType,
         m_static[currMap][index].startingPos, m_static[currMap][index].rotation,
-        m_static[currMap][index].objectSize, m_static[currMap][index].textureEnum
+        m_static[currMap][index].objectSize, 
+        m_stringTextures.find(m_static[currMap][index].textureEnum)->second
     );
 }
 //=============================================================================
@@ -117,4 +130,6 @@ std::string MapData::getCurrHero(int currMap)
 {
     return m_hero[currMap].name;
 }
+//=============================================================================
+
 //=============================================================================

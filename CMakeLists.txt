@@ -76,6 +76,8 @@ add_subdirectory (Resources/Fonts)
 add_subdirectory (Resources/StatesStuff/Game)
 add_subdirectory (Resources/StatesStuff/Menu)
 add_subdirectory (Resources/WorldObjects)
+add_subdirectory (Resources/MusicAndSound)
+
 
 
 add_subdirectory (World)

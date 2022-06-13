@@ -7,4 +7,5 @@
 											  "Enemy.cpp"
 											  "RandomEnemy.cpp"
 											  "Dorothy.cpp"
+											  "Glinda.cpp"
 											  )
