@@ -54,14 +54,14 @@ void GameState::setButtons()
 //=============================================================================
 void GameState::setBoundries()
 {
-    auto screenSize = m_view.getSize();
-    //m_window->getSize();
+    //auto screenSize = m_view.getSize();
+    auto screenSize = m_window->getSize();
     float widthInMeters = screenSize.x / SCALE;
     float heightInMeters = screenSize.y / SCALE;
     b2Vec2 topLeftCorner = b2Vec2(0, 0);
-    b2Vec2 topRightCorner = b2Vec2(30, 0);
+    b2Vec2 topRightCorner = b2Vec2(widthInMeters, 0);
     b2Vec2 lowerLeftCorner = b2Vec2(0, heightInMeters);
-    b2Vec2 lowerRightCorner = b2Vec2(30, heightInMeters);
+    b2Vec2 lowerRightCorner = b2Vec2(widthInMeters, heightInMeters);
 
 
     b2BodyDef screenBorderDef;
@@ -77,7 +77,7 @@ void GameState::setBoundries()
 
     screenBorderShape.SetTwoSided(topLeftCorner, topRightCorner);
     screenBorderBody->CreateFixture(&fixture);
-    screenBorderShape.SetTwoSided(lowerRightCorner, topRightCorner);
+    screenBorderShape.SetTwoSided(topRightCorner, lowerRightCorner);
     screenBorderBody->CreateFixture(&fixture);
     screenBorderShape.SetTwoSided(lowerRightCorner, lowerLeftCorner);
     screenBorderBody->CreateFixture(&fixture);

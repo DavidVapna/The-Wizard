@@ -16,8 +16,6 @@ public:
 	const int getButLen(int index) const;
 
 
-
-
 private:
 
 	Resources();

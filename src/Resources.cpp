@@ -34,7 +34,7 @@ const sf::Texture& Resources::getTexture(int wantedTexture) const
 void Resources::setTextures() 
 {
 	m_textures.insert(TexturesPair((int)Textures::MenuBG, loadSfObj<sf::Texture>("MenuBG.png")));
-	m_textures.insert(TexturesPair((int)Textures::GameBG, loadSfObj<sf::Texture>("GameLevel1BG.jpg")));
+	m_textures.insert(TexturesPair((int)Textures::GameBG, loadSfObj<sf::Texture>("GameState.png")));
 	m_textures.insert(TexturesPair((int)Textures::MenuButtons, loadSfObj<sf::Texture>("MenuButtons.png")));
 	m_textures.insert(TexturesPair((int)Textures::Buttons, loadSfObj<sf::Texture>("Buttons.jpg")));
 	m_textures.insert(TexturesPair((int)Textures::CowardlyLion, loadSfObj<sf::Texture>("CowardlyLion.png")));

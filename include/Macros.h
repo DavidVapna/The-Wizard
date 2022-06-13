@@ -40,7 +40,7 @@ constexpr auto POSITION_ITERATOR = 2;
 
 
 const sf::Vector2u MENU_SIZE(800, 800);
-const sf::Vector2u GAME_SIZE(900, 900);
+const sf::Vector2u GAME_SIZE(1500, 800);
 
 const sf::Vector2i MENU_POS(500, 130);
 const sf::Vector2i GAME_POS(350, 50);
