@@ -8,7 +8,7 @@
 class GameObject
 {
 public:
-	GameObject(b2World* world, int bodyT, const sf::Vector2f& pos, bool rotation, const sf::Vector2f& size, int gameObj);
+	GameObject(b2World* world, int bodyT, const sf::Vector2f& pos, bool rotation, const sf::Vector2f& size);
 	virtual ~GameObject() = default;
 
 	virtual void setAnimation(const sf::Vector2f& size, int theObject) = 0;
@@ -25,8 +25,9 @@ public:
 
 protected:
 	//private functions
-	void setBody(b2World* world, int bodyT, const sf::Vector2f& pos, bool rotation);
-	void setFixture(b2World* world, const sf::Vector2f& size, uint16 categoryBits = 1, bool isSensor = 0, uint16 maskBits = 1);
+	void setBody(b2BodyDef& objBody, int bodyT, const sf::Vector2f& pos, bool rotation);
+	void setFixture(b2PolygonShape& shape, float density, float friction, float restitution,
+		uint16 categoryBits, uint16 maskBits, bool isSensor, int data = 0);
 
 protected:
 	sf::Sprite m_sprite;

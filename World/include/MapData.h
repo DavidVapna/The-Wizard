@@ -6,13 +6,7 @@
 #include "Hero.h"
 #include "Dorothy.h"
 //=============================================================================
-struct Object 
-{
-	std::string type, name, textureEnum;
-	int bodyType;
-	sf::Vector2f startingPos, objectSize;
-	bool rotation;
-};
+
 //=============================================================================
 class MapData
 {
@@ -35,16 +29,16 @@ public:
 
 private:
 	void loadFromFile(std::ifstream& data, std::string& string, int map,
-		std::vector<Object>& staticObjs, std::vector<Object>& movingObjs);
+		std::vector<ObjectInfo>& staticObjs, std::vector<ObjectInfo>& movingObjs);
 	void setObjects(std::ifstream& data, std::string& streamLine, int map,
-		std::vector<Object>& staticObjs, std::vector<Object>& movingObjs);
+		std::vector<ObjectInfo>& staticObjs, std::vector<ObjectInfo>& movingObjs);
 	
 private:
 
 
 	int m_numOfMaps;
-	std::vector<Object> m_hero;
-	std::vector<std::vector<Object>> m_moving;
-	std::vector<std::vector<Object>> m_static;
+	std::vector<ObjectInfo> m_hero;
+	std::vector<std::vector<ObjectInfo>> m_moving;
+	std::vector<std::vector<ObjectInfo>> m_static;
 	std::unordered_map<std::string, int> m_stringTextures;
 };

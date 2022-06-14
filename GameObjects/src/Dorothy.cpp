@@ -11,7 +11,11 @@ Dorothy::Dorothy(b2World* world, int bodyT, const sf::Vector2f& pos, bool rotati
 {
 	m_body->GetUserData().pointer = reinterpret_cast<uintptr_t>(this);
 
-
+	b2PolygonShape shape;
+	shape.SetAsBox((size.x / 2.f) / SCALE, (size.y / 2.f) / SCALE);
+	setFixture(shape, 1.f, 1.f, 0.f, (uint16)CategoryBits::Hero | (uint16)CategoryBits::Dorothy,
+		0xFFFF, false);
+	m_body->GetUserData().pointer = reinterpret_cast<uintptr_t>(this);
 	//b2Filter filter;
 	//filter.categoryBits = (uint16)CategoryBits::Hero;
 	//filter.maskBits = (uint16)CategoryBits::Glinda | (uint16)CategoryBits::Boundries | (uint16)CategoryBits::Hero;

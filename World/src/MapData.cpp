@@ -15,7 +15,7 @@ void MapData::loadMap(int map)
     std::ifstream data(level);
     std::string streamLine;
 
-    std::vector<Object> staticObjs, movingObjs;
+    std::vector<ObjectInfo> staticObjs, movingObjs;
 
 
     std::getline(data, streamLine);
@@ -28,7 +28,7 @@ void MapData::loadMap(int map)
 }
 //=============================================================================
 void MapData::loadFromFile(std::ifstream& data, std::string& string, int map,
-    std::vector<Object>& staticObjs, std::vector<Object>& movingObjs)
+    std::vector<ObjectInfo>& staticObjs, std::vector<ObjectInfo>& movingObjs)
 {
     std::string streamLine;
 
@@ -45,9 +45,9 @@ void MapData::loadFromFile(std::ifstream& data, std::string& string, int map,
 }
 //=============================================================================
 void MapData::setObjects(std::ifstream& data, std::string& streamLine, int map,
-    std::vector<Object>& staticObjs, std::vector<Object>& movingObjs)
+    std::vector<ObjectInfo>& staticObjs, std::vector<ObjectInfo>& movingObjs)
 {
-    Object newObject;
+    ObjectInfo newObject;
     std::getline(data, streamLine);
     std::istringstream stringStream(streamLine);
     stringStream >> newObject.type;
@@ -56,7 +56,6 @@ void MapData::setObjects(std::ifstream& data, std::string& streamLine, int map,
     stringStream >> newObject.startingPos.x >> newObject.startingPos.y;
     stringStream >> newObject.rotation;
     stringStream >> newObject.objectSize.x >> newObject.objectSize.y;
-    stringStream >> newObject.textureEnum;
 
     if (newObject.type == "Hero")
     {
@@ -84,31 +83,21 @@ void MapData::mapStringToInt()
 //=============================================================================
 std::unique_ptr<Hero> MapData::createHero(b2World& world, int currMap)
 {
-    return   Factory<Hero>::create(
-        m_hero[currMap].name, &world, m_hero[currMap].bodyType,
-        m_hero[currMap].startingPos, m_hero[currMap].rotation,
-        m_hero[currMap].objectSize,
-        m_stringTextures.find(m_hero[currMap].textureEnum)->second);
+    return Factory<Hero>::create(&world, m_hero[currMap],
+        m_stringTextures.find(m_hero[currMap].name)->second);
+
 }
 //=============================================================================
 std::unique_ptr<MovingObject> MapData::createMovingObject(int index, b2World& world, int currMap)
 {
-    return  Factory<MovingObject>::create(
-        m_moving[currMap][index].name, &world, m_moving[currMap][index].bodyType,
-        m_moving[currMap][index].startingPos, m_moving[currMap][index].rotation,
-        m_moving[currMap][index].objectSize,
-        m_stringTextures.find(m_moving[currMap][index].textureEnum)->second
-    );
+    return  Factory<MovingObject>::create(&world, m_moving[currMap][index],
+        m_stringTextures.find(m_moving[currMap][index].name)->second);
 }
 //=============================================================================
 std::unique_ptr<StaticObject> MapData::createStaticObject(int index, b2World& world, int currMap)
 {
-    return  Factory<StaticObject>::create(
-        m_static[currMap][index].name, &world, m_static[currMap][index].bodyType,
-        m_static[currMap][index].startingPos, m_static[currMap][index].rotation,
-        m_static[currMap][index].objectSize, 
-        m_stringTextures.find(m_static[currMap][index].textureEnum)->second
-    );
+    return  Factory<StaticObject>::create(&world, m_static[currMap][index],
+        m_stringTextures.find(m_static[currMap][index].name)->second);
 }
 //=============================================================================
 int MapData::getStaticCount(int currMap)

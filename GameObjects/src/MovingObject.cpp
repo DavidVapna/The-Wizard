@@ -6,18 +6,16 @@
 
 MovingObject::MovingObject(b2World* world, int bodyT, const sf::Vector2f& pos,
 	bool rotation, const sf::Vector2f& size, int gameObj)
-	:GameObject(world, bodyT, pos, rotation, size, gameObj),
-	m_canJump(true)
+	:GameObject(world, bodyT, pos, rotation, size),
+	m_numFootContacts(0)
 {
 	setAnimation(size, gameObj);
 
-
-	//polygonShape.SetAsBox(0.3, 0.3, b2Vec2(0, -2), 0);
-	//myFixtureDef.isSensor = true;
-	//b2Fixture* footSensorFixture = m_body->CreateFixture(&myFixtureDef);
-	//footSensorFixture->SetUserData((void*)3);
-
-
+	b2PolygonShape feetSensorShape;
+	feetSensorShape.SetAsBox((size.x) / (SCALE * 6),
+		1 / (SCALE * 2), b2Vec2(0, size.y / (2.f * SCALE)), 0);
+	setFixture(feetSensorShape, 1.f, 1.f, 0.f, (uint16)CategoryBits::FeetSensor,
+		(uint16)CategoryBits::Block | (uint16)CategoryBits::Boundries, true, FEET_DATA);
 }
 //=============================================================================
 void MovingObject::setAnimation(const sf::Vector2f& size, int theObject)
@@ -57,5 +55,10 @@ void MovingObject::updateAnimation(const float& deltaTime)
 		//	m_animation->play("WALKING", deltaTime);
 		//	break;
 	}
+}
+//=============================================================================
+void MovingObject::footContact(int val)
+{
+	m_numFootContacts += val;
 }
 //=============================================================================

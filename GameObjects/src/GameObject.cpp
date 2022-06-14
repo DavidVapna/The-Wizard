@@ -2,33 +2,36 @@
 #include "GameObject.h"
 //=============================================================================
 GameObject::GameObject(b2World* world, int bodyT, const sf::Vector2f& pos,
-	bool rotation, const sf::Vector2f& size, int gameObj)
+	bool rotation, const sf::Vector2f& size)
 	:m_colided(false), m_removed(false)
 {
-	setBody(world, bodyT, pos, rotation);
-	setFixture(world, size);
+	b2BodyDef bodyDef;
+	setBody(bodyDef, bodyT, pos, rotation);
+	m_body = world->CreateBody(&bodyDef);
 }
 //=============================================================================
-void GameObject::setBody(b2World* world, int bodyT, const sf::Vector2f& pos,
-	bool rotation)
+void GameObject::setBody(b2BodyDef& objBody, int bodyT, const sf::Vector2f& pos, bool rotation)
 {
-	b2BodyDef objBody;
 	objBody.position.Set(pos.x / SCALE , pos.y / SCALE);
 	objBody.type = (b2BodyType)bodyT;
 	objBody.angle = 0;
+	objBody.fixedRotation = rotation;
 	//objBody.userData.pointer = reinterpret_cast<uintptr_t>(this);
-	m_body = world->CreateBody(&objBody);
 }
 //=============================================================================
-void GameObject::setFixture(b2World* world, const sf::Vector2f& size, uint16 categoryBits, bool isSensor, uint16 maskBits)
+void GameObject::setFixture(b2PolygonShape& shape, float density, float friction, float restitution,
+	uint16 categoryBits, uint16 maskBits, bool isSensor, int data)
 {
-	b2PolygonShape objShape;
-	objShape.SetAsBox((size.x / 2.f) / SCALE, (size.y / 2.f) / SCALE);
-	b2FixtureDef FixtureDef;
-	FixtureDef.density = 1.5f;
-	FixtureDef.friction = 0.7f;
-	FixtureDef.shape = &objShape;
-	m_body->CreateFixture(&FixtureDef);
+	b2FixtureDef fixtureDef;
+	fixtureDef.shape = &shape;
+	fixtureDef.density = density;
+	fixtureDef.friction = friction;
+	fixtureDef.restitution = restitution;
+	fixtureDef.filter.categoryBits = categoryBits;
+	fixtureDef.filter.maskBits = maskBits;
+	fixtureDef.isSensor = isSensor;
+	fixtureDef.userData.pointer = data;
+	m_body->CreateFixture(&fixtureDef);
 }
 //=============================================================================
 sf::Vector2f GameObject::getPos() const

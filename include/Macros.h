@@ -5,6 +5,8 @@
 #include "box2d/box2d.h"
 #include "SFML/Audio.hpp"
 
+
+
 #include <typeinfo>
 #include <typeindex>
 #include <ctime>
@@ -21,7 +23,6 @@
 //=============================================================================
 
 
-
 const int NUM_OF_MAPS = 1;
 
 //=============================================================================
@@ -29,8 +30,8 @@ const int NUM_OF_MAPS = 1;
 //=============================================================================
 
 constexpr auto SCALE = 30.f;
-constexpr auto JUMP = 1.7f;
-
+constexpr auto JUMP = 7.5f;
+constexpr auto FEET_DATA = 3;
 constexpr auto JUMP_EPS = 0.1f;
 
 constexpr auto TIME_STEP = 1.0f / 60.0f;
@@ -157,12 +158,24 @@ enum class CategoryBits
 	Glinda = 0x0002,
 	Boundries = 0x0004,
 	FeetSensor = 0x0008,
-	FloorObject = 0x0016,
-	MovingObject = 0x0032,
+	Block = 0x0010,
+	Enemy = 0x0020,
+	RedHeels = 0x0040,
+	Dorothy = 0x0080,
 };
+
 //=============================================================================
 
 constexpr auto MUSIC_VOLUME = 4;
 constexpr auto EFFECTS_VOLUME = 5;
 
+//=============================================================================
+struct ObjectInfo
+{
+	std::string type, name;
+	sf::Vector2f startingPos, objectSize;
+	float desinity, friction;
+	bool rotation;
+	int bodyType;
+};
 //=============================================================================

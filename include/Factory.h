@@ -10,8 +10,9 @@ class Factory
 {
 public:
 	using pFnc = std::unique_ptr<T>(*)(b2World*, int, const sf::Vector2f&, bool, const sf::Vector2f& , int);
-	static std::unique_ptr<T> create(const std::string& name, b2World* world, int bodyT,
-		const sf::Vector2f& pos, bool rotation, const sf::Vector2f& size, int gameObj);
+
+	static std::unique_ptr<T> create(b2World* world, ObjectInfo& info, int gameObj);
+
 	static bool registerit(const std::string& name, pFnc);
 
 
@@ -20,13 +21,12 @@ private:
 };
 //=============================================================================
 template<class T>
-std::unique_ptr<T> Factory<T>::create(const std::string& name, b2World* world, int bodyT,
-	const sf::Vector2f& pos, bool rotation, const sf::Vector2f& size, int gameObj)
+std::unique_ptr<T> Factory<T>::create(b2World* world, ObjectInfo& info, int gameObj)
 {
-	auto it = Factory::getMap().find(name);
+	auto it = Factory::getMap().find(info.name);
 	if (it == Factory::getMap().end())
 		return nullptr;
-	return it->second(world, bodyT, pos, rotation, size, gameObj);
+	return it->second(world, info.bodyType, info.startingPos, info.rotation, info.objectSize, gameObj);
 }
 //=============================================================================
 template<class T>
@@ -44,27 +44,8 @@ auto& Factory<T>::getMap()
 }
 //=============================================================================
 /*
-std::vector<std::string> getNames() 
-{
-	std::vector<std::string> names;
-	std::cout << "enter type of objects to build (or exit)" << std::endl;
-	while (true) {
-		std::string s;
-		std::cin >> s;
-		if (s == "exit")
-			break;
-		names.emplace_back(s);
-	}
-	return names;
-}
-auto inNames = getNames();
-	for (const auto& name : inNames) 
-	{
-		auto p = Factory::create(name);
-
-		if (p)
-			p->show();
-		else
-			std::cout << "Class not found!\n";
-	}	
+.name, &world, m_hero[currMap].bodyType,
+		m_hero[currMap].startingPos, m_hero[currMap].rotation,
+		m_hero[currMap].objectSize,
+	   );
 */
