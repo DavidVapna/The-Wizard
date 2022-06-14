@@ -14,8 +14,6 @@ public:
 	virtual void update(const float& deltaTime) override;
 
 
-	//MovingObject(MovingObject&&) = default;
-	//MovingObject& operator=(MovingObject&&) = default;
 
 private:
 	void setAnimation(const sf::Vector2f& size, int theObject) override;
@@ -23,7 +21,7 @@ private:
 
 protected:
 	std::unique_ptr<Movement> m_moveComp;
-
+	bool m_canJump;
 private:
 };
 

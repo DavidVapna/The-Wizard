@@ -73,7 +73,7 @@ void GameState::setBoundries()
     b2FixtureDef fixture;
     fixture.shape = &screenBorderShape;
     fixture.friction = 1.f;
-
+    //fixture.filter.categoryBits = ((uint16)CategoryBits::Boundries);
 
 
     screenBorderShape.SetTwoSided(topLeftCorner, topRightCorner);

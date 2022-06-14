@@ -15,7 +15,7 @@ void PlayerMovement::update(const float& deltaTime)
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
 		setDirection(Direction::Right);
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W) /* && m_body->GetLinearVelocity().y == 0 */)
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
 		jump(deltaTime);
 }
 //=============================================================================

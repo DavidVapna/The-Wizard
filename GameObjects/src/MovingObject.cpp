@@ -6,15 +6,18 @@
 
 MovingObject::MovingObject(b2World* world, int bodyT, const sf::Vector2f& pos,
 	bool rotation, const sf::Vector2f& size, int gameObj)
-	:GameObject(world, bodyT, pos, rotation, size, gameObj)
+	:GameObject(world, bodyT, pos, rotation, size, gameObj),
+	m_canJump(true)
 {
 	setAnimation(size, gameObj);
 
-	//b2PolygonShape polygonShape;
+
 	//polygonShape.SetAsBox(0.3, 0.3, b2Vec2(0, -2), 0);
 	//myFixtureDef.isSensor = true;
 	//b2Fixture* footSensorFixture = m_body->CreateFixture(&myFixtureDef);
 	//footSensorFixture->SetUserData((void*)3);
+
+
 }
 //=============================================================================
 void MovingObject::setAnimation(const sf::Vector2f& size, int theObject)

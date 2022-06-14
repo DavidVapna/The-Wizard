@@ -1,5 +1,6 @@
 //=============================================================================
 #include "Movement.h"
+#include "Resources.h"
 //=============================================================================
 
 //=============================================================================
@@ -22,8 +23,9 @@ void Movement::move(const float& deltaTime)
 void Movement::jump(const float& deltaTime)
 {
 	float force = -m_body->GetMass() * JUMP;
-	//m_body->ApplyForce(b2Vec2(0, force), m_body->GetWorldCenter(), true);
 	m_body->ApplyLinearImpulse(b2Vec2(0, force), m_body->GetWorldCenter(), true);
+	//m_body->ApplyForce(b2Vec2(0, force), m_body->GetWorldCenter(), true);
+	//Resources::instance().playSound(Sounds::Jump);
 	//Resources::getResourceRef().playSound(jumpingSound);
 }
 //=============================================================================

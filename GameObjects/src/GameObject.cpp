@@ -20,7 +20,7 @@ void GameObject::setBody(b2World* world, int bodyT, const sf::Vector2f& pos,
 	m_body = world->CreateBody(&objBody);
 }
 //=============================================================================
-void GameObject::setFixture(b2World* world, const sf::Vector2f& size)
+void GameObject::setFixture(b2World* world, const sf::Vector2f& size, uint16 categoryBits, bool isSensor, uint16 maskBits)
 {
 	b2PolygonShape objShape;
 	objShape.SetAsBox((size.x / 2.f) / SCALE, (size.y / 2.f) / SCALE);
@@ -54,5 +54,10 @@ bool GameObject::isRemoved() const
 void GameObject::removed()
 {
 	m_removed = true;
+}
+//=============================================================================
+void GameObject::disable()
+{
+	m_body->SetEnabled(false);
 }
 //=============================================================================

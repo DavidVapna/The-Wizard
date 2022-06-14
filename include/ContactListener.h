@@ -12,5 +12,8 @@ public:
 
 private:
 	void sendCollision(b2Body* contactA, b2Body* contactB);
+
+
+
 };
 //============================================================================

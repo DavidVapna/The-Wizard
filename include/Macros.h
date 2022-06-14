@@ -119,6 +119,9 @@ enum class Textures
 enum class Sounds
 {
 	theme,
+	Jump,
+
+
 
 	MaxSounds
 };
@@ -148,10 +151,18 @@ enum class Shape
 	Box
 };
 //=============================================================================
-
+enum class CategoryBits
+{
+	Hero = 0x0001,
+	Glinda = 0x0002,
+	Boundries = 0x0004,
+	FeetSensor = 0x0008,
+	FloorObject = 0x0016,
+	MovingObject = 0x0032,
+};
 //=============================================================================
 
-constexpr auto MUSIC_VOLUME = 7;
+constexpr auto MUSIC_VOLUME = 4;
 constexpr auto EFFECTS_VOLUME = 5;
 
 //=============================================================================

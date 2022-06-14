@@ -15,9 +15,12 @@ public:
 	void setDirection(Direction dir);
 	void setIdle();
 	Direction getDirection() const;
+	void canJump();
+
 
 protected:
 	Direction m_direction;
+
 private:
 	sf::Sprite* m_sprite;
 	b2Body* m_body;

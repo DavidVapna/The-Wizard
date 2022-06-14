@@ -21,12 +21,12 @@ public:
 
 	//Pure Virtual
 	virtual void update(const float& deltaTime) = 0;
+	virtual void disable();
 
-
-private:
+protected:
 	//private functions
 	void setBody(b2World* world, int bodyT, const sf::Vector2f& pos, bool rotation);
-	void setFixture(b2World* world, const sf::Vector2f& size);
+	void setFixture(b2World* world, const sf::Vector2f& size, uint16 categoryBits = 1, bool isSensor = 0, uint16 maskBits = 1);
 
 protected:
 	sf::Sprite m_sprite;
