@@ -24,34 +24,34 @@ void GameBoard::loadGame()
     {
         m_movingObjects.push_back(std::move(m_maps.createMovingObject(index, *m_world, m_mapIndex)));
     }
+    for (int index = 0; index < m_maps.getNPCCount(m_mapIndex); index++)
+    {
+        m_npcObjects.push_back(std::move(m_maps.createNpcObject(index, *m_world, m_mapIndex)));
+    }
 }
 //=============================================================================
 void GameBoard::draw()
 {
-    for (auto& object : m_movingObjects)
-    {
-        object->draw(*m_window);
-    }
-    for (auto& object : m_staticObjects)
-    {
-        object->draw(*m_window);
-    }
+    for (auto& movingObj : m_movingObjects)
+        movingObj->draw(*m_window);
+    for (auto& staticObj : m_staticObjects)
+        staticObj->draw(*m_window);
+    for (auto& npc : m_npcObjects)
+        npc->draw(*m_window);
+
     m_hero->draw(*m_window);
 }
 //=============================================================================
 void GameBoard::update(const float& deltaTime)
 {
     m_hero->update(deltaTime);
-    for (auto& object : m_staticObjects)
-    {
-        object->update(deltaTime);
-    }
-
-    for (auto& object : m_movingObjects)
-    {
-        object->update(deltaTime);
-    }
-
+    for (auto& movingObj : m_movingObjects)
+        movingObj->update(deltaTime);
+    for (auto& staticObj : m_staticObjects)
+        staticObj->update(deltaTime);
+    for (auto& npc : m_npcObjects)
+        npc->update(deltaTime);
+    
     for (auto i = 0; i < m_staticObjects.size(); i++)
     {
         if (m_staticObjects[i]->isRemoved())
@@ -60,7 +60,6 @@ void GameBoard::update(const float& deltaTime)
             i--;
         }
     }
-
     for (auto i = 0; i < m_movingObjects.size(); i++)
     {
         if (m_movingObjects[i]->isRemoved())
@@ -71,11 +70,6 @@ void GameBoard::update(const float& deltaTime)
     }
 }
 //=============================================================================
-void GameBoard::addObject()
-{
-
-}
-//=============================================================================
 sf::Vector2f GameBoard::getHeroPos()
 {
     return m_hero->getPos();
@@ -83,6 +77,12 @@ sf::Vector2f GameBoard::getHeroPos()
 //=============================================================================
 void GameBoard::nextMap()
 {
+    m_window;
+    m_staticObjects;
+    m_npcObjects;
+    m_movingObjects;
+
+
     m_hero->removed();
     for (auto& moving : m_movingObjects)
     {
@@ -93,6 +93,5 @@ void GameBoard::nextMap()
         staticObj->removed();
     }
     ++m_mapIndex;
-    loadGame();
 }
 //=============================================================================

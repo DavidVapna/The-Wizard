@@ -43,6 +43,7 @@ void Resources::setTextures()
 	m_textures.insert(TexturesPair((int)Textures::RedHeels, loadSfObj<sf::Texture>("RedHeels.png")));
 	m_textures.insert(TexturesPair((int)Textures::Mouse, loadSfObj<sf::Texture>("Mouse.png")));
 	m_textures.insert(TexturesPair((int)Textures::Glinda, loadSfObj<sf::Texture>("Glinda.png")));
+	m_textures.insert(TexturesPair((int)Textures::PauseBG, loadSfObj<sf::Texture>("PauseBG.png")));
 }
 //============================================================================
 //sets the butten len based on the string len
@@ -69,8 +70,7 @@ Resources& Resources::instance()
 //============================================================================
 void Resources::setSounds() 
 {
-	return;
-	//m_sounds.insert(std::pair<int, sf::SoundBuffer>((int)Sounds::theme, loadSfObj<sf::SoundBuffer>("theme.wav")));
+	m_sounds.insert(std::pair<int, sf::SoundBuffer>((int)Sounds::Jump, loadSfObj<sf::SoundBuffer>("jump.wav")));
 }
 //============================================================================
 const int Resources::getButLen(int index) const

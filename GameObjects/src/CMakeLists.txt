@@ -8,4 +8,5 @@
 											  "RandomEnemy.cpp"
 											  "Dorothy.cpp"
 											  "Glinda.cpp"
+											  "NPC.cpp"
 											  )

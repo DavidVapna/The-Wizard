@@ -42,7 +42,7 @@ void MultiMethod::HeroGlinda(GameObject* hero, GameObject* glinda) const
         //throw...
         std::cout << "baddd" << "HERO RED HEELS MULTIMETHOD SETT THROW!!!";
     }
-    theGlinda->disable();
+    theGlinda->removed();
 }
 //============================================================================
 void MultiMethod::GlindaHero(GameObject* glinda, GameObject* hero) const

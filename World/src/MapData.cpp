@@ -1,9 +1,9 @@
 //=============================================================================
 #include "MapData.h"
-#include "Factory.h"
+
 //=============================================================================
 MapData::MapData()
-    :m_numOfMaps(0), m_hero(0),m_moving(0),m_static(0)
+    :m_numOfMaps(0), m_hero(0),m_moving(0),m_static(0), m_NPC(0)
 {
 
 }
@@ -15,23 +15,23 @@ void MapData::loadMap(int map)
     std::ifstream data(level);
     std::string streamLine;
 
-    std::vector<ObjectInfo> staticObjs, movingObjs;
+    std::vector<ObjectInfo> staticObjs, movingObjs, npcObjs;
 
 
     std::getline(data, streamLine);
-    loadFromFile(data, streamLine, map, staticObjs, movingObjs);
+    loadFromFile(data, streamLine, map, staticObjs, movingObjs, npcObjs);
 
     m_static.push_back(staticObjs);
     m_moving.push_back(movingObjs);
+    m_NPC.push_back(npcObjs);
 
     mapStringToInt();
 }
 //=============================================================================
-void MapData::loadFromFile(std::ifstream& data, std::string& string, int map,
-    std::vector<ObjectInfo>& staticObjs, std::vector<ObjectInfo>& movingObjs)
+void MapData::loadFromFile(std::ifstream& data, std::string& streamLine, int map,
+    std::vector<ObjectInfo>& staticObjs, std::vector<ObjectInfo>& movingObjs,
+    std::vector<ObjectInfo>& npcObjs)
 {
-    std::string streamLine;
-
     if (!data.is_open())
     {
         //throw
@@ -39,13 +39,14 @@ void MapData::loadFromFile(std::ifstream& data, std::string& string, int map,
     }
     while (!data.eof())
     {
-        setObjects(data, streamLine, map, staticObjs, movingObjs);
+        setObjects(data, streamLine, map, staticObjs, movingObjs, npcObjs);
     }
     data.close();
 }
 //=============================================================================
 void MapData::setObjects(std::ifstream& data, std::string& streamLine, int map,
-    std::vector<ObjectInfo>& staticObjs, std::vector<ObjectInfo>& movingObjs)
+    std::vector<ObjectInfo>& staticObjs, std::vector<ObjectInfo>& movingObjs,
+    std::vector<ObjectInfo>& npcObjs)
 {
     ObjectInfo newObject;
     std::getline(data, streamLine);
@@ -68,6 +69,10 @@ void MapData::setObjects(std::ifstream& data, std::string& streamLine, int map,
     else if(newObject.type == "Static")
     {
         staticObjs.push_back(newObject);
+    } 
+    else if(newObject.type == "NPC")
+    {
+        npcObjs.push_back(newObject);
     }
 }
 
@@ -100,14 +105,25 @@ std::unique_ptr<StaticObject> MapData::createStaticObject(int index, b2World& wo
         m_stringTextures.find(m_static[currMap][index].name)->second);
 }
 //=============================================================================
-int MapData::getStaticCount(int currMap)
+std::unique_ptr<NPC> MapData::createNpcObject(int index, b2World& world, int currMap)
+{
+    return  Factory<NPC>::create(&world, m_NPC[currMap][index],
+        m_stringTextures.find(m_NPC[currMap][index].name)->second);
+}
+//=============================================================================
+int MapData::getStaticCount(int currMap) const
 {
     return m_static[currMap].size();
 }
 //=============================================================================
-int MapData::getMovingCount(int currMap)
+int MapData::getMovingCount(int currMap) const
 {
     return m_moving[currMap].size();
+}
+//=============================================================================
+int MapData::getNPCCount(int currMap) const
+{
+    return m_NPC[currMap].size();
 }
 //=============================================================================
 int MapData::getNumOfMaps()

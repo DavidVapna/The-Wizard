@@ -43,14 +43,11 @@ void GameState::setBG()
     //m_backGround.setScale(sf::Vector2f(m_window->getSize().x / textSize.x, m_window->getSize().y / textSize .y));
     m_backGround.setScale(m_window->getSize().x / m_backGround.getGlobalBounds().width,
         m_window->getSize().y / m_backGround.getGlobalBounds().height);
-
 }
 //=============================================================================
 void GameState::setButtons()
 {
     return;
-    //m_buttons[Play_B] = std::make_unique<Button>
-    //    (PLAY_POS, BUTTONS_SIZE, PLAY_TEXT, sf::Color::Red, sf::Color::Yellow, sf::Color::Green);
 }
 //=============================================================================
 void GameState::setBoundries()
@@ -73,7 +70,7 @@ void GameState::setBoundries()
     b2FixtureDef fixture;
     fixture.shape = &screenBorderShape;
     fixture.friction = 1.f;
-    //fixture.filter.categoryBits = ((uint16)CategoryBits::Boundries);
+    fixture.filter.categoryBits = ((uint16)CategoryBits::Boundries);
 
 
     screenBorderShape.SetTwoSided(topLeftCorner, topRightCorner);
