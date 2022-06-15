@@ -3,7 +3,6 @@
 //=============================================================================
 
 //=============================================================================
-
 MovingObject::MovingObject(b2World* world, int bodyT, const sf::Vector2f& pos,
 	bool rotation, const sf::Vector2f& size, int gameObj)
 	:GameObject(world, bodyT, pos, rotation, size),
@@ -12,7 +11,7 @@ MovingObject::MovingObject(b2World* world, int bodyT, const sf::Vector2f& pos,
 	setAnimation(size, gameObj);
 
 	b2PolygonShape feetSensorShape;
-	feetSensorShape.SetAsBox((size.x) / (SCALE * 6), 1 / (SCALE * 2), b2Vec2(0, size.y / (2.f * SCALE)), 0);
+	feetSensorShape.SetAsBox((size.x) / (SCALE * 2), 1 / (SCALE * 2), b2Vec2(0, size.y / (2.f * SCALE)), 0);
 	setFixture(feetSensorShape, 1.f, 1.f, 0.f, (uint16)CategoryBits::FeetSensor,
 		(uint16)CategoryBits::Block | (uint16)CategoryBits::Boundries | (uint16)CategoryBits::Glinda, true, FEET_DATA);
 }
@@ -21,12 +20,10 @@ void MovingObject::setAnimation(const sf::Vector2f& size, int theObject)
 {
 	auto& texture = Resources::instance().getTexture(theObject);
 	m_animation = std::make_unique<Animation>(m_sprite, texture);
-	auto start = sf::Vector2i{ 0,0 };
 
 	auto animSpeed = 100.f;
-
-	auto AnimStartIdle = sf::Vector2i(0, 0);/*starting row and col*/
-	auto AnimInRowIdle = sf::Vector2i(4, 0);/*(images per row, current row*/
+	auto AnimStartIdle = sf::Vector2i(0,0);
+	auto AnimInRowIdle = sf::Vector2i(0,0);
 
 	m_animation->addAnimation("IDLE", animSpeed, AnimStartIdle, AnimInRowIdle, LION_ANIM);
 

@@ -12,6 +12,8 @@ GameState::GameState(sf::RenderWindow* window, std::stack<std::unique_ptr<State>
     m_debugMouse("", Resources::instance().getFont(Fonts::Bold_F))
 {
     m_debugMouse.setFillColor(sf::Color::Yellow);
+
+
     m_world.SetContactListener(&m_contactListener);
     setWindow();
     setBoundries();
@@ -90,7 +92,7 @@ void GameState::setBoundries()
 void GameState::debugMouse()
 {
     updateMouse();
-    m_debugMouse.setString(std::format("({}, {})", m_mouseView.x, m_mouseView.y));
+    m_debugMouse.setString(std::format("({}, {})", (int)m_mouseView.x, (int)m_mouseView.y));
     m_debugMouse.setPosition(m_window->mapPixelToCoords({ m_mouseWindow.x, m_mouseWindow.y }));
     m_window->draw(m_debugMouse);
 }

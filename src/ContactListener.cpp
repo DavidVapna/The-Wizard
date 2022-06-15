@@ -5,15 +5,10 @@ void ContactListener::BeginContact(b2Contact* contact)
 {
     auto contactA = contact->GetFixtureA()->GetBody();
     auto contactB = contact->GetFixtureB()->GetBody();
-
-
-    //check if fixture A or B are the foot sensor
     int fixDataA = contact->GetFixtureA()->GetUserData().pointer;
     int fixDataB = contact->GetFixtureB()->GetUserData().pointer;
     if (checkFootContact(fixDataA, 1, contactA) || checkFootContact(fixDataB, 1, contactB))
         return;
-
-
 
 	sendCollision(contactA, contactB);
 }
@@ -45,9 +40,6 @@ void ContactListener::EndContact(b2Contact* contact)
 {
     auto contactA = contact->GetFixtureA()->GetBody();
     auto contactB = contact->GetFixtureB()->GetBody();
-
-
-    //check if fixture A or B are the foot sensor
     int fixDataA = contact->GetFixtureA()->GetUserData().pointer;
     int fixDataB = contact->GetFixtureB()->GetUserData().pointer;
     if (checkFootContact(fixDataA, -1, contactA) ||
