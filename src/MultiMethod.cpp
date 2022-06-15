@@ -17,8 +17,8 @@ MultiMethod::MultiMethod()
     m_collisionFuncs[Key(typeid(RandomEnemy), typeid(Block   ))] = &MultiMethod::RandomEnemyBlock;
     m_collisionFuncs[Key(typeid(Block   ), typeid(RandomEnemy))] = &MultiMethod::BlockRandomEnemy;
 
-    m_collisionFuncs[Key(typeid(Hero   ), typeid(Glinda))] = &MultiMethod::HeroGlinda;
-    m_collisionFuncs[Key(typeid(Glinda ), typeid(Hero))] = &MultiMethod::GlindaHero;
+    m_collisionFuncs[Key(typeid(Dorothy   ), typeid(Glinda))] = &MultiMethod::HeroGlinda;
+    m_collisionFuncs[Key(typeid(Glinda ), typeid(Dorothy))] = &MultiMethod::GlindaHero;
 }
 //============================================================================
 void MultiMethod::DorothyRedHeels(GameObject* dorothy, GameObject* redHeels) const
@@ -33,26 +33,26 @@ void MultiMethod::DorothyRedHeels(GameObject* dorothy, GameObject* redHeels) con
     theRedHeels->removed();
 }
 //============================================================================
+void MultiMethod::redHeelsDorothy(GameObject* redHeels, GameObject* dorothy) const
+{
+    DorothyRedHeels(dorothy, redHeels);
+}
+//============================================================================
 void MultiMethod::HeroGlinda(GameObject* hero, GameObject* glinda) const
 {
-    Hero* theHero = static_cast<Hero*>(hero);
+    Dorothy* theHero = static_cast<Dorothy*>(hero);
     Glinda* theGlinda = static_cast<Glinda*>(glinda);
     if (!theHero || !glinda)
     {
         //throw...
         std::cout << "baddd" << "HERO RED HEELS MULTIMETHOD SETT THROW!!!";
     }
-    theGlinda->removed();
+    theGlinda->chat(theHero);
 }
 //============================================================================
 void MultiMethod::GlindaHero(GameObject* glinda, GameObject* hero) const
 {
     HeroGlinda(hero, glinda);
-}
-//============================================================================
-void MultiMethod::redHeelsDorothy(GameObject* redHeels, GameObject* dorothy) const
-{
-    DorothyRedHeels(dorothy, redHeels);
 }
 //============================================================================
 void MultiMethod::RandomEnemyBlock(GameObject* enemy, GameObject* block) const

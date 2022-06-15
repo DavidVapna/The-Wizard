@@ -12,11 +12,9 @@ MovingObject::MovingObject(b2World* world, int bodyT, const sf::Vector2f& pos,
 	setAnimation(size, gameObj);
 
 	b2PolygonShape feetSensorShape;
-	feetSensorShape.SetAsBox((size.x) / (SCALE * 6),
-		1 / (SCALE * 2), b2Vec2(0, size.y / (2.f * SCALE)), 0);
+	feetSensorShape.SetAsBox((size.x) / (SCALE * 6), 1 / (SCALE * 2), b2Vec2(0, size.y / (2.f * SCALE)), 0);
 	setFixture(feetSensorShape, 1.f, 1.f, 0.f, (uint16)CategoryBits::FeetSensor,
-		(uint16)CategoryBits::Block | (uint16)CategoryBits::Boundries | (uint16)CategoryBits::Glinda
-		, true, FEET_DATA);
+		(uint16)CategoryBits::Block | (uint16)CategoryBits::Boundries | (uint16)CategoryBits::Glinda, true, FEET_DATA);
 }
 //=============================================================================
 void MovingObject::setAnimation(const sf::Vector2f& size, int theObject)

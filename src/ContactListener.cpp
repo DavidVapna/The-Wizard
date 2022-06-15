@@ -10,8 +10,7 @@ void ContactListener::BeginContact(b2Contact* contact)
     //check if fixture A or B are the foot sensor
     int fixDataA = contact->GetFixtureA()->GetUserData().pointer;
     int fixDataB = contact->GetFixtureB()->GetUserData().pointer;
-    if (checkFootContact(fixDataA, 1, contactA) ||
-        checkFootContact(fixDataB, 1, contactB))
+    if (checkFootContact(fixDataA, 1, contactA) || checkFootContact(fixDataB, 1, contactB))
         return;
 
 

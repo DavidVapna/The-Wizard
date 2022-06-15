@@ -2,6 +2,7 @@
 #pragma once
 //============================================================================
 #include "StaticObject.h"
+class Dorothy;
 //============================================================================
 class NPC : public StaticObject
 {
@@ -11,7 +12,11 @@ public:
 	virtual ~NPC() = default;
 	void setAnimation(const sf::Vector2f& size, int theObject);
 	void update(const float& deltaTime);
+	void chat(Dorothy* dorothy);
 
+
+protected:
+	sf::Text text;
 
 private:
 };
