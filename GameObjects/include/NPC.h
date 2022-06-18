@@ -14,9 +14,11 @@ public:
 	void chat();
 	bool inChat() const;
 	void drawText(sf::RenderWindow& window);
-	bool isClickedOn();
+	void isClicked(sf::RenderWindow& window);
+
+
 protected:
-	sf::RectangleShape m_textBG;
+	sf::Sprite m_textBG;
 	sf::Text m_text;
 	bool m_inChat = false;
 	std::vector<std::string > m_lines;
@@ -26,3 +28,4 @@ protected:
 private:
 };
 //============================================================================
+//

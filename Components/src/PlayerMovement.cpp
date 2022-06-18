@@ -12,13 +12,17 @@ void PlayerMovement::update(const float& deltaTime)
 {
 	m_jumpTimeout--;
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left) ||
+		sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
 		setDirection(Direction::Left);
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right) ||
+		sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
 		setDirection(Direction::Right);
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W) &&
+	if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space) ||
+		sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up) ||
+		sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W)) &&
 		*m_numFootContacts >= 1 &&  m_jumpTimeout <= 0)
 	{
 		jump(deltaTime);

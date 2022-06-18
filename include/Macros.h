@@ -117,6 +117,7 @@ enum class Textures
 	PauseBG,
 	RandomEnemy,
 	Glinda,
+	ChatBG,
 	
 	MaxTextures
 };
@@ -158,7 +159,7 @@ enum Fonts
 	Bold_F,
 	Empty_F,
 	Italic_F,
-
+	NpcFont,
 
 	MaxFonts
 };

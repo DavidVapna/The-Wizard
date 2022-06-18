@@ -11,8 +11,6 @@ GameObject::GameObject(b2World* world, int bodyT, const sf::Vector2f& pos, bool 
 
 
 	m_sprite.setTexture(Resources::instance().getTexture(gameObj));
-
-
 	m_animation = std::make_unique<Animation>(m_sprite);
 }
 //=============================================================================

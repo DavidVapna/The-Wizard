@@ -54,6 +54,7 @@ void Resources::setTextures()
 	m_textures[(int)Textures::RandomEnemy	] = loadSfObj<sf::Texture>("RandomEnemy.png");
 	m_textures[(int)Textures::Glinda		] = loadSfObj<sf::Texture>("Glinda.png");
 	m_textures[(int)Textures::PauseBG		] = loadSfObj<sf::Texture>("PauseBG.png");
+	m_textures[(int)Textures::ChatBG		] = loadSfObj<sf::Texture>("ChatBG.jpg");
 }
 //============================================================================
 void Resources::setAnimationInfo()
@@ -87,6 +88,7 @@ void Resources::setFonts()
 	m_fonts.insert(FontPair((int)Fonts::Bold_F, loadSfObj<sf::Font>("Bold.TTF")));
 	m_fonts.insert(FontPair((int)Fonts::Empty_F, loadSfObj<sf::Font>("Empty.TTF")));
 	m_fonts.insert(FontPair((int)Fonts::Italic_F, loadSfObj<sf::Font>("Italic.TTF")));
+	m_fonts.insert(FontPair((int)Fonts::NpcFont, loadSfObj<sf::Font>("dpcomic.ttf")));
 }
 //-----------------------------------------------------------------------------
 Resources& Resources::instance()

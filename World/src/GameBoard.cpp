@@ -54,7 +54,10 @@ void GameBoard::update(const float& deltaTime)
     for (auto& staticObj : m_staticObjects)
         staticObj->update(deltaTime);
     for (auto& npc : m_npcObjects)
+    {
+        npc->isClicked(*m_window);
         npc->update(deltaTime);
+    }
     
     for (auto i = 0; i < m_staticObjects.size(); i++)
     {
