@@ -2,17 +2,13 @@
 #include "Movement.h"
 #include "Resources.h"
 //=============================================================================
-
-//=============================================================================
-
 Movement::Movement(sf::Sprite* sprite, b2Body* body)
-	:m_direction(Direction::Idle),m_sprite(sprite), m_body(body)
-{
-
-}
+	:m_direction(Direction::Idle),m_sprite(sprite), m_body(body),
+	m_isJumping(false){}
 //=============================================================================
 void Movement::move(const float& deltaTime)
 {
+	m_isJumping = m_body->GetLinearVelocity().y > 0.5;
 	b2Vec2 velocity = b2Vec2(toVector(m_direction).x * m_speed * deltaTime, m_body->GetLinearVelocity().y);
 	m_body->SetLinearVelocity(velocity);
 
@@ -39,5 +35,10 @@ void Movement::setIdle()
 Direction Movement::getDirection() const
 {
 	return m_direction;
+}
+//=============================================================================
+bool Movement::isJumping() const
+{
+	return m_isJumping;
 }
 //=============================================================================

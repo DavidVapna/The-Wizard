@@ -37,18 +37,15 @@ private:
 	MultiMethod(const MultiMethod&) = default;
 	MultiMethod& operator=(const MultiMethod&) = default;
 
-
 	void redHeelsDorothy(GameObject* redHeels, GameObject* dorothy) const;
 	void DorothyRedHeels(GameObject* dorothy, GameObject* redHeels) const;
-
 	void RandomEnemyBlock(GameObject* enemy, GameObject* block) const;
 	void BlockRandomEnemy(GameObject* block, GameObject* enemy) const;
-
-	void HeroGlinda(GameObject* hero, GameObject* glinda) const;
-	void GlindaHero(GameObject* glinda, GameObject* hero) const;
-
 	void blockHero(GameObject* block, GameObject* hero) const;
-
+	void HeroPortal(GameObject* hero, GameObject* portal) const;
+	void PortalHero(GameObject* portal, GameObject* hero) const;
+	
+private:
 	std::unordered_map<Key, CorrectFunc, ArgsHash<std::type_index>, KeyEqual<std::type_index>> m_collisionFuncs;
 };
 //============================================================================

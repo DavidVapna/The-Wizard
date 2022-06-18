@@ -8,18 +8,17 @@ class GameBoard
 public:
 	GameBoard(sf::RenderWindow* window, b2World* world);
 	~GameBoard() = default;
-
-	void loadGame();
+	void loadMap();
 	void setLevels();
 	void draw();
 	void update(const float& deltaTime);
 	void nextMap();
-
-
 	sf::Vector2f getHeroPos();
-
-
+	bool mapFisnished() const;
+	void remove();
+	int getCurrMap() const { return m_mapIndex; };
 private:
+
 	std::unique_ptr<Hero> m_hero;
 	std::vector <std::unique_ptr<MovingObject>> m_movingObjects;
 	std::vector<std::unique_ptr<StaticObject>> m_staticObjects;

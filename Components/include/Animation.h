@@ -6,12 +6,10 @@
 class AnimationComp
 {
 public:
-    //const sf::Vector2i& frames, const sf::Vector2i& frameStart, sf::Vector2f size
     AnimationComp(sf::Sprite& sprite, float animTimer, const AnimationInfo& animInfo, const sf::Vector2f& objSize)
         :m_sprite(sprite), m_animTimer(animTimer),
         m_timer(0.f), m_size(animInfo.frameSize), m_done(false)
     {
-        //(animInfo.frames.x == 1 && animInfo.frames.y == 0) ? m_static = true : m_static = false;
             
         m_startRect = sf::IntRect(animInfo.frameStart.x * m_size.x, animInfo.frameStart.y * m_size.y, m_size.x, m_size.y);
         m_currentRect = m_startRect;
@@ -25,7 +23,6 @@ public:
 
     void play(const float& deltaTime)
     {
-        //if (m_static) return;
         return;
         m_done = false;
         m_timer += 100.f * deltaTime;
@@ -51,7 +48,6 @@ public:
     ~AnimationComp() = default;
 
 public:
-    //members
     sf::Sprite& m_sprite;
     float m_animTimer;
     float m_timer;
@@ -60,7 +56,6 @@ public:
     sf::IntRect m_endRect;
     sf::Vector2f m_size;
     bool m_done;
-   // bool m_static;
 };
 //=============================================================================
 class Animation

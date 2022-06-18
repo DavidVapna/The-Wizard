@@ -7,7 +7,7 @@ bool Block::m_registerit = Factory<StaticObject>::registerit("Block",
 	{ return std::make_unique<Block>(world, bodyT, pos, rotation, size, gameObj); });
 //=============================================================================
 Block::Block(b2World* world, int bodyT, const sf::Vector2f& pos,
-	bool rotation, const sf::Vector2f& size, int gameObj)
+		   	 bool rotation, const sf::Vector2f& size, int gameObj)
 	:StaticObject(world, bodyT, pos, rotation, size, gameObj)
 {
 	b2PolygonShape shape;

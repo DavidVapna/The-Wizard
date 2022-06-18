@@ -1,22 +1,12 @@
 //============================================================================
 #include "Resources.h"
 //============================================================================
-using TexturesPair = std::pair<int, sf::Texture>;
-using AnimInfoPair = std::pair<int, AnimationInfo>;
-using ButtonPairStr = std::pair<int, int>;
-using FontPair = std::pair<int, sf::Font>;
-//============================================================================
-/*
-* Singeltone that holds all the Resources in the game
-* c-tor
-*/
 Resources::Resources()
-	: m_buttonStrLen(), m_textures((int)Textures::MaxTextures), m_fonts((int)Fonts::MaxFonts),
+	:m_textures((int)Textures::MaxTextures), m_fonts((int)Fonts::MaxFonts),
 	m_sounds((int)Sounds::MaxSounds), m_music()
 {
 	setTextures();
 	setAnimationInfo();
-	setButtonStrLengh();
 	setFonts();
 	setSounds();
 
@@ -44,9 +34,9 @@ const AnimationInfo& Resources::getAnimInfo(int wantedInfo) const
 void Resources::setTextures() 
 {
 	m_textures[(int)Textures::MenuBG		] = loadSfObj<sf::Texture>("MenuBG.png");
-	m_textures[(int)Textures::GameBG		] = loadSfObj<sf::Texture>("GameState.png");
+	m_textures[(int)Textures::GameBG0		] = loadSfObj<sf::Texture>("GameState1.png");
 	m_textures[(int)Textures::MenuButtons	] = loadSfObj<sf::Texture>("MenuButtons.png");
-	m_textures[(int)Textures::Buttons	    ] = loadSfObj<sf::Texture>("Buttons.jpg");
+ 	m_textures[(int)Textures::Buttons	    ] = loadSfObj<sf::Texture>("Buttons.png");
 	m_textures[(int)Textures::CowardlyLion	] = loadSfObj<sf::Texture>("CowardlyLion.png");
 	m_textures[(int)Textures::Dorothy		] = loadSfObj<sf::Texture>("Dorothy.png");
 	m_textures[(int)Textures::Block			] = loadSfObj<sf::Texture>("Block.png");
@@ -55,6 +45,8 @@ void Resources::setTextures()
 	m_textures[(int)Textures::Glinda		] = loadSfObj<sf::Texture>("Glinda.png");
 	m_textures[(int)Textures::PauseBG		] = loadSfObj<sf::Texture>("PauseBG.png");
 	m_textures[(int)Textures::ChatBG		] = loadSfObj<sf::Texture>("ChatBG.jpg");
+	m_textures[(int)Textures::Portal		] = loadSfObj<sf::Texture>("Portal.png");
+	m_textures[(int)Textures::GameBG1		] = loadSfObj<sf::Texture>("GameState2.png");
 }
 //============================================================================
 void Resources::setAnimationInfo()
@@ -72,23 +64,15 @@ void Resources::setAnimationInfo()
 	m_animInfo[(int)Animations::RANDOM_L	  ] = AnimationInfo(sf::Vector2i(0, 0), sf::Vector2i(3, 0), sf::Vector2f(46.75f, 33.f));
 	m_animInfo[(int)Animations::RANDOM_R	  ] = AnimationInfo(sf::Vector2i(0, 1), sf::Vector2i(3, 1), sf::Vector2f(46.75f, 33.f));
 	m_animInfo[(int)Animations::REDHEELS	  ] = AnimationInfo(sf::Vector2i(0, 0), sf::Vector2i(0, 0), sf::Vector2f(360.f, 360.f));
+	m_animInfo[(int)Animations::Portal	      ] = AnimationInfo(sf::Vector2i(0, 0), sf::Vector2i(0, 0), sf::Vector2f(306, 165.f));
 }
-//============================================================================
-//sets the butten len based on the string len
-void Resources::setButtonStrLengh() 
-{
-	return;
-	//m_buttonStrLen.insert(ButtonPairStr(singlePlayer, strlen("single player")));
-}
-//============================================================================
-
 //============================================================================
 void Resources::setFonts() 
 {
-	m_fonts.insert(FontPair((int)Fonts::Bold_F, loadSfObj<sf::Font>("Bold.TTF")));
-	m_fonts.insert(FontPair((int)Fonts::Empty_F, loadSfObj<sf::Font>("Empty.TTF")));
-	m_fonts.insert(FontPair((int)Fonts::Italic_F, loadSfObj<sf::Font>("Italic.TTF")));
-	m_fonts.insert(FontPair((int)Fonts::NpcFont, loadSfObj<sf::Font>("dpcomic.ttf")));
+	m_fonts[(int)Fonts::Bold_F  ] = loadSfObj<sf::Font>("Bold.TTF");
+	m_fonts[(int)Fonts::Empty_F ] = loadSfObj<sf::Font>("Empty.TTF");
+	m_fonts[(int)Fonts::Italic_F] = loadSfObj<sf::Font>("Italic.TTF");
+	m_fonts[(int)Fonts::NpcFont ] = loadSfObj<sf::Font>("dpcomic.ttf");
 }
 //-----------------------------------------------------------------------------
 Resources& Resources::instance()
@@ -99,15 +83,8 @@ Resources& Resources::instance()
 //============================================================================
 void Resources::setSounds() 
 {
-	m_sounds.insert(std::pair<int, sf::SoundBuffer>((int)Sounds::Jump, loadSfObj<sf::SoundBuffer>("jump.wav")));
+	m_sounds[(int)Sounds::Jump] = loadSfObj<sf::SoundBuffer>("jump.wav");
 }
-//============================================================================
-const int Resources::getButLen(int index) const
-{
-	return findInMap<std::unordered_map<int, int>, int>(m_buttonStrLen, index);
-}
-//============================================================================
-
 //============================================================================
 const sf::Font& Resources::getFont(int index) const
 {
@@ -140,7 +117,3 @@ void Resources::stopMusic()
 	m_music.stop();
 }
 //============================================================================
-//============================================================================
-//============================================================================
-
-

@@ -8,8 +8,8 @@
 class GameObject
 {
 public:
-	GameObject(b2World* world, int bodyT, const sf::Vector2f& pos, bool rotation,
-		const sf::Vector2f& size, int gameObj);
+	GameObject(b2World* world, int bodyT, const sf::Vector2f& pos,
+			   bool rotation, const sf::Vector2f& size, int gameObj);
 	virtual ~GameObject() = default;
 
 	virtual void draw(sf::RenderWindow& window);
@@ -20,18 +20,14 @@ public:
 	virtual void disable();
 
 protected:
-	//private functions
 	void setBody(b2BodyDef& objBody, int bodyT, const sf::Vector2f& pos, bool rotation);
-	void setFixture(b2PolygonShape& shape, float density, float friction, float restitution,
-		uint16 categoryBits, uint16 maskBits, bool isSensor, int data = 0);
-
+	void setFixture(b2PolygonShape& shape, float density, float friction,
+		float restitution, uint16 categoryBits, uint16 maskBits, bool isSensor, int data = 0);
 
 protected:
 	sf::Sprite m_sprite;
 	b2Body* m_body;
 	bool m_colided;
-
-	
 	bool m_removed;
 	std::unique_ptr<Animation> m_animation;
 

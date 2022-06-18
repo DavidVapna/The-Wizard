@@ -1,8 +1,6 @@
 //=============================================================================
 #include "MenuState.h"
 //=============================================================================
-
-//=============================================================================
 MenuState::MenuState(sf::RenderWindow* window, std::stack<std::unique_ptr<State>>* states)
     :State(window, states)
 {
@@ -26,8 +24,6 @@ MenuState::~MenuState()
 
 }
 //=============================================================================
-
-//=============================================================================
 void MenuState::setBG()
 {
     m_backGround.setTexture(Resources::instance().getTexture((int)Textures::MenuBG));
@@ -44,8 +40,6 @@ void MenuState::setButtons()
     m_buttons[(int)MenuButtons::Quit_B] = std::make_unique<Button>
         (QUIT_POS, BUTTONS_SIZE, QUIT_TEXT, sf::Color::Red, sf::Color::Yellow, sf::Color::Green);
 }
-//=============================================================================
-
 //=============================================================================
 void MenuState::setWindow()
 {
@@ -82,6 +76,7 @@ void MenuState::update(const float& deltaTime)
         sf::Keyboard::isKeyPressed(sf::Keyboard::Key::P))
     {
         m_states->emplace(std::make_unique<GameState>(m_window, this->m_states));
+        return;
     }
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Q))
@@ -96,8 +91,4 @@ void MenuState::updateInput(const float& deltaTime)
 {
     return;
 }
-//=============================================================================
-
-//=============================================================================
-
 //=============================================================================

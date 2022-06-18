@@ -1,8 +1,6 @@
 //=============================================================================
 #include "Enemy.h"
 //=============================================================================
-
-//=============================================================================
 Enemy::Enemy(b2World* world, int bodyT, const sf::Vector2f& pos, bool rotation, const sf::Vector2f& size, int gameObj)
 	:MovingObject(world, bodyT, pos, rotation, size, gameObj)
 {
@@ -14,6 +12,4 @@ Enemy::Enemy(b2World* world, int bodyT, const sf::Vector2f& pos, bool rotation, 
 		(uint16)CategoryBits::Block | (uint16)CategoryBits::Boundries,
 		false);
 }
-//=============================================================================
-
 //=============================================================================

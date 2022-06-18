@@ -8,18 +8,17 @@ class Movement
 public:
 	Movement(sf::Sprite* sprite, b2Body* body);
 	virtual ~Movement() = default;
-	
 	virtual void update(const float& deltaTime) = 0;
 	virtual void move(const float& deltaTime);
 	void jump(const float& deltaTime);
 	void setDirection(Direction dir);
 	void setIdle();
 	Direction getDirection() const;
-	void canJump();
-
+	bool isJumping() const;
 
 protected:
 	Direction m_direction;
+	bool m_isJumping;
 
 private:
 	sf::Sprite* m_sprite;

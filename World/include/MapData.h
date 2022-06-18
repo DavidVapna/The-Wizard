@@ -11,7 +11,7 @@ class MapData
 public:
 	MapData();
 	~MapData() = default;
-	void loadMap(int map);
+	void loadGame(int map);
 
 
 	int getStaticCount(int currMap) const;

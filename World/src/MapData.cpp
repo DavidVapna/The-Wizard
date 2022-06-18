@@ -8,7 +8,7 @@ MapData::MapData()
 
 }
 //=============================================================================
-void MapData::loadMap(int map)
+void MapData::loadGame(int map)
 {
     ++m_numOfMaps;
     std::string level("Level" + std::to_string(map) + ".ini");
@@ -83,6 +83,7 @@ void MapData::mapStringToInt()
     m_stringTextures["Block"] = (int)Textures::Block;
     m_stringTextures["RedHeels"] = (int)Textures::RedHeels;
     m_stringTextures["RandomEnemy"] = (int)Textures::RandomEnemy;
+    m_stringTextures["Portal"] = (int)Textures::Portal;
 }
 //=============================================================================
 std::unique_ptr<Hero> MapData::createHero(b2World& world, int currMap)

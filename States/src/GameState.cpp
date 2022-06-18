@@ -4,6 +4,8 @@
 //=============================================================================
 #include "GameState.h"
 //=============================================================================
+enum currMap{first, second, third};
+//=============================================================================
 GameState::GameState(sf::RenderWindow* window, std::stack<std::unique_ptr<State>>* states)
     :State(window, states),
     m_world(b2Vec2(0.f, 9.8)),
@@ -11,13 +13,10 @@ GameState::GameState(sf::RenderWindow* window, std::stack<std::unique_ptr<State>
     m_debugMouse("", Resources::instance().getFont(Fonts::Bold_F))
 {
     m_debugMouse.setFillColor(sf::Color::Red);
-
-
     m_world.SetContactListener(&m_contactListener);
     setWindow();
     setBoundries();
     setBG();
-    m_gameBoard.loadGame();
     Resources::instance().playMusic(Sounds::theme);
 }
 //=============================================================================
@@ -38,10 +37,19 @@ void GameState::setWindow()
 //=============================================================================
 void GameState::setBG()
 {
-    m_backGround.setTexture(Resources::instance().getTexture((int)Textures::GameBG));
+    switch (m_gameBoard.getCurrMap())
+    {
+    case first:
+        m_backGround.setTexture(Resources::instance().getTexture((int)Textures::GameBG0));
+        break;
+    case second:
+        m_backGround.setTexture(Resources::instance().getTexture((int)Textures::GameBG1));
+        break;
+    case third:
+        m_backGround.setTexture(Resources::instance().getTexture((int)Textures::GameBG2));
+        break;
+    }
     auto textSize = m_backGround.getTexture()->getSize();
-
-    //m_backGround.setScale(sf::Vector2f(m_window->getSize().x / textSize.x, m_window->getSize().y / textSize .y));
     m_backGround.setScale(m_window->getSize().x / m_backGround.getGlobalBounds().width,
         m_window->getSize().y / m_backGround.getGlobalBounds().height);
 }
@@ -53,7 +61,6 @@ void GameState::setButtons()
 //=============================================================================
 void GameState::setBoundries()
 {
-    //auto screenSize = m_view.getSize();
     auto screenSize = m_window->getSize();
     float widthInMeters = screenSize.x / SCALE;
     float heightInMeters = screenSize.y / SCALE;
@@ -81,11 +88,7 @@ void GameState::setBoundries()
     screenBorderBody->CreateFixture(&fixture);
     screenBorderShape.SetTwoSided(lowerLeftCorner, topLeftCorner);
     screenBorderBody->CreateFixture(&fixture);
-
 }
-//=============================================================================
-
-
 //=============================================================================
 void GameState::debugMouse()
 {
@@ -97,11 +100,20 @@ void GameState::debugMouse()
 //=============================================================================
 void GameState::update(const float& deltaTime)
 {
-    m_deltaTime = m_gameClock.restart().asSeconds();
-    m_world.Step(TIME_STEP, VELOCITY_ITERATOR, POSITION_ITERATOR);
-    updateInput(m_deltaTime);
-    m_gameBoard.update(m_deltaTime);
-    updateView();
+    if (m_gameBoard.mapFisnished())
+    {
+        m_gameBoard.nextMap();
+        setWindow();
+        setBG();
+    }
+    else
+    {
+        m_deltaTime = m_gameClock.restart().asSeconds();
+        m_world.Step(TIME_STEP, VELOCITY_ITERATOR, POSITION_ITERATOR);
+        updateInput(m_deltaTime);
+        m_gameBoard.update(m_deltaTime);
+        updateView();
+    }
 }
 //=============================================================================
 void GameState::updateInput(const float& deltaTime)
@@ -112,7 +124,6 @@ void GameState::updateInput(const float& deltaTime)
         Resources::instance().stopMusic();
         return;
     }
-
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::P))
     {
         if (!m_pause)
@@ -144,10 +155,7 @@ void GameState::draw()
     debugMouse();
 }
 //=============================================================================
-void GameState::keyboardInput(const float& deltaTime)
-{
-    return;
-}
+
 //=============================================================================
 
 //=============================================================================

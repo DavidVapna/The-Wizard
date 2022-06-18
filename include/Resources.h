@@ -3,23 +3,18 @@
 //============================================================================
 #include "Macros.h"
 //=============================================================================
-
-//=============================================================================
 class Resources 
 {
 public:
-	//----------------functions-------------------
 	static Resources& instance();
 	const sf::Texture& getTexture(int wantedTexture) const;
 	const sf::Font& getFont(int index) const;
 	void playMusic(Sounds sound);
 	void playSound(Sounds sound);
-	const int getButLen(int index) const;
 	void stopMusic();
 	const AnimationInfo& getAnimInfo(int wantedInfo) const;
 
 private:
-
 	Resources();
 	Resources(const Resources&) = default;
 	Resources& operator=(const Resources&) = default;
@@ -28,25 +23,19 @@ private:
 	void setAnimationInfo();
 	void setFonts();
 	void setSounds();
-	void setButtonStrLengh();
+
+	template <class SfObj>
+	SfObj loadSfObj(const std::string& str);
+	template<class Container, class Return>
+	Return findInMap(Container map, int index) const;
 
 private:
 	std::unordered_map <int, AnimationInfo> m_animInfo;
 	std::unordered_map <int, sf::Texture> m_textures;
 	std::unordered_map <int, sf::Font> m_fonts;
-	std::unordered_map <int, int> m_buttonStrLen;
 	std::unordered_map <int, sf::SoundBuffer> m_sounds;
 	sf::Sound m_sound;
 	sf::Music m_music;
-
-
-
-
-	template <class SfObj>
-	SfObj loadSfObj(const std::string& str);
-
-	template<class Container, class Return>
-	Return findInMap(Container map, int index) const;
 };
 //=============================================================================
 template<class Container, class Return>

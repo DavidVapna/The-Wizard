@@ -7,7 +7,7 @@ bool Glinda::m_registerit = Factory<NPC>::registerit("Glinda",
 	{ return std::make_unique<Glinda>(world, bodyT, pos, rotation, size, gameObj); });
 //=============================================================================
 Glinda::Glinda(b2World* world, int bodyT, const sf::Vector2f& pos,
-	bool rotation, const sf::Vector2f& size, int gameObj)
+			   bool rotation, const sf::Vector2f& size, int gameObj)
 	:NPC(world, bodyT, pos, rotation, size, gameObj)
 {
 	b2PolygonShape shape;

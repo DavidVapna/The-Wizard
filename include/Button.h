@@ -9,7 +9,7 @@ class Button
 {
 public:
 	Button(sf::Vector2f pos, sf::Vector2f size, std::string text,
-		sf::Color idle, sf::Color hover, sf::Color clicked);
+		    sf::Color idle, sf::Color hover, sf::Color clicked);
 	~Button() = default;
 	void draw(sf::RenderWindow& window);
 	void update(sf::Vector2f mousePos);

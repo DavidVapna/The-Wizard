@@ -6,6 +6,7 @@
 #include "Dorothy.h"
 #include "RandomEnemy.h"
 #include "Glinda.h"
+#include "Portal.h"
 //============================================================================
 using Key = std::pair<std::type_index, std::type_index>;
 //============================================================================
@@ -13,15 +14,12 @@ MultiMethod::MultiMethod()
 {
     m_collisionFuncs[Key(typeid(Dorothy ), typeid(RedHeels))] = &MultiMethod::DorothyRedHeels;
     m_collisionFuncs[Key(typeid(RedHeels), typeid(Dorothy ))] = &MultiMethod::redHeelsDorothy;
-
     m_collisionFuncs[Key(typeid(RandomEnemy), typeid(Block   ))] = &MultiMethod::RandomEnemyBlock;
     m_collisionFuncs[Key(typeid(Block   ), typeid(RandomEnemy))] = &MultiMethod::BlockRandomEnemy;
-
-    m_collisionFuncs[Key(typeid(Dorothy   ), typeid(Glinda))] = &MultiMethod::HeroGlinda;
-    m_collisionFuncs[Key(typeid(Glinda ), typeid(Dorothy))] = &MultiMethod::GlindaHero;
-
     m_collisionFuncs[Key(typeid(Dorothy), typeid(Block))] = &MultiMethod::blockHero;
-
+    m_collisionFuncs[Key(typeid(Hero), typeid(Portal))] = &MultiMethod::HeroPortal;
+    m_collisionFuncs[Key(typeid(Dorothy), typeid(Portal))] = &MultiMethod::HeroPortal;
+    m_collisionFuncs[Key(typeid(Portal), typeid(Hero))] = &MultiMethod::PortalHero;
 }
 //============================================================================
 void MultiMethod::DorothyRedHeels(GameObject* dorothy, GameObject* redHeels) const
@@ -34,31 +32,12 @@ void MultiMethod::DorothyRedHeels(GameObject* dorothy, GameObject* redHeels) con
         std::cout << "baddd" << "HERO RED HEELS MULTIMETHOD SETT THROW!!!";
     }
     theRedHeels->removed();
+    theHero->missionComplete();
 }
 //============================================================================
 void MultiMethod::redHeelsDorothy(GameObject* redHeels, GameObject* dorothy) const
 {
     DorothyRedHeels(dorothy, redHeels);
-}
-//============================================================================
-void MultiMethod::HeroGlinda(GameObject* hero, GameObject* glinda) const
-{
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
-    {
-        Dorothy* theHero = static_cast<Dorothy*>(hero);
-        Glinda* theGlinda = static_cast<Glinda*>(glinda);
-        if (!theHero || !glinda)
-        {
-            //throw...
-            std::cout << "baddd" << "HERO RED HEELS MULTIMETHOD SETT THROW!!!";
-        }
-        theGlinda->chat();
-    }
-}
-//============================================================================
-void MultiMethod::GlindaHero(GameObject* glinda, GameObject* hero) const
-{
-    HeroGlinda(hero, glinda);
 }
 //============================================================================
 void MultiMethod::RandomEnemyBlock(GameObject* enemy, GameObject* block) const
@@ -78,14 +57,12 @@ void MultiMethod::BlockRandomEnemy(GameObject* block, GameObject* enemy) const
     RandomEnemyBlock(enemy, block);
 }
 //============================================================================
-//gets the reference for the singeltone collision map
 MultiMethod& MultiMethod::getInstance() 
 {
 	static MultiMethod colision;
 	return colision;
 }
 //============================================================================
-//handles the collision between 2 objects
 void MultiMethod::handleCollision(GameObject* objectA, GameObject* objectB)
 {
 	auto it = m_collisionFuncs.find(Key(typeid(*objectA), typeid(*objectB)));
@@ -93,14 +70,21 @@ void MultiMethod::handleCollision(GameObject* objectA, GameObject* objectB)
 		(this->*(it->second))(objectA, objectB);
 }
 //============================================================================
-void legsGround(GameObject* legs, GameObject* ground)
+void MultiMethod::HeroPortal(GameObject* hero, GameObject* portal) const
 {
-
+    Hero* theHero = static_cast<Hero*>(hero);
+    Portal* thePortal = static_cast<Portal*>(portal);
+    if (!theHero || !thePortal)
+    {
+        //throw...
+        std::cout << "baddd" << "HERO RED HEELS MULTIMETHOD SETT THROW!!!";
+    }
+    theHero->usedPortal();
 }
 //============================================================================
-void groundLegs(GameObject* ground, GameObject* legs)
+void MultiMethod::PortalHero(GameObject* portal, GameObject* hero) const
 {
-
+    HeroPortal(hero, portal);
 }
 //============================================================================
 void MultiMethod::blockHero(GameObject* block, GameObject* hero) const

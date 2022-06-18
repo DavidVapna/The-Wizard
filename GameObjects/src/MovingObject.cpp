@@ -1,8 +1,6 @@
 //=============================================================================
 #include "MovingObject.h"
 //=============================================================================
-
-//=============================================================================
 MovingObject::MovingObject(b2World* world, int bodyT, const sf::Vector2f& pos,
 	bool rotation, const sf::Vector2f& size, int gameObj)
 	:GameObject(world, bodyT, pos, rotation, size, gameObj),
@@ -13,8 +11,6 @@ MovingObject::MovingObject(b2World* world, int bodyT, const sf::Vector2f& pos,
 	setFixture(sensors, 0.f, 0.f, 0.f, (uint16)CategoryBits::FeetSensor,
 		(uint16)CategoryBits::Block | (uint16)CategoryBits::Boundries, true, FEET_DATA);
 }
-//=============================================================================
-
 //=============================================================================
 void MovingObject::update(const float& deltaTime)
 {
@@ -43,12 +39,19 @@ void MovingObject::updateAnimation(const float& deltaTime)
 	default:
 		m_animation->play("Default", deltaTime);
 		break;
-	//case Direction::Idle:
-	//	m_animation->play("IdleR", deltaTime);
-	//	break;
-	//case Direction::Jump:
-	//	m_animation->play("JumpR", deltaTime);
-	//	break;
+	}
+	if (m_moveComp->isJumping())
+	{
+		switch (m_moveComp->getDirection())
+		{
+		case Direction::Left:
+			m_animation->play("JumpL", deltaTime);
+			break;
+		case Direction::Right:
+			m_animation->play("JumpR", deltaTime);
+			break;
+		}
+
 	}
 }
 //=============================================================================

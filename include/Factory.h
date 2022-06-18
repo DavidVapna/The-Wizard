@@ -1,20 +1,16 @@
 //=============================================================================
 #pragma once 
 //=============================================================================
-//#include <memory>
-
 #include "Macros.h"
 //=============================================================================
 template<class T>
 class Factory
 {
 public:
-	using pFnc = std::unique_ptr<T>(*)(b2World*, int, const sf::Vector2f&, bool, const sf::Vector2f& , int);
-
+	using pFnc = std::unique_ptr<T>(*)
+				(b2World*, int, const sf::Vector2f&, bool, const sf::Vector2f& , int);
 	static std::unique_ptr<T> create(b2World* world, ObjectInfo& info, int gameObj);
-
 	static bool registerit(const std::string& name, pFnc);
-
 
 private:
 	static auto& getMap();
@@ -43,9 +39,3 @@ auto& Factory<T>::getMap()
 	return map;
 }
 //=============================================================================
-/*
-.name, &world, m_hero[currMap].bodyType,
-		m_hero[currMap].startingPos, m_hero[currMap].rotation,
-		m_hero[currMap].objectSize,
-	   );
-*/

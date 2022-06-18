@@ -21,8 +21,8 @@ std::unique_ptr<State> Controller::initMenu()
 //=============================================================================
 void Controller::loadWithFile(sf::VideoMode &windSize, std::string &windName, unsigned &frameLim)
 {
-    ///RETURN TO FIXXXXXXXXXXXXXXXXXXXXXXX
- /*   std::ifstream config("Config/window.ini");
+
+   std::ifstream config("Config/window.ini");
     if (config.is_open())
     {
         std::getline(config, windName);
@@ -34,10 +34,7 @@ void Controller::loadWithFile(sf::VideoMode &windSize, std::string &windName, un
         windSize = sf::VideoMode(GAME_SIZE.x, GAME_SIZE.y);
         windName = "The Wizard";
         frameLim = 60;
-    }*/
-    windSize = sf::VideoMode(GAME_SIZE.x, GAME_SIZE.y);
-    windName = "The Wizard";
-    frameLim = 60;
+    }
 }
 //=============================================================================
 Controller::~Controller()
@@ -57,7 +54,6 @@ void Controller::run()
 void Controller::update()
 {
     handleEvents();
-
     if (!m_states.empty())
     {
         m_states.top()->update(0);
@@ -98,14 +94,4 @@ void Controller::closeGame()
 {
     return;
 }
-//=============================================================================
-
-//=============================================================================
-
-//=============================================================================
-
-
-
-
-
 //=============================================================================

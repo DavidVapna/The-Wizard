@@ -11,14 +11,12 @@ Button::Button(sf::Vector2f pos, sf::Vector2f size, std::string text,
 	m_button.setPosition(pos);
 	m_button.setFillColor(m_idle);
 
-
 	m_text.setFont(Resources::instance().getFont(Fonts::Bold_F));
 	m_text.setString(text);
 	m_text.setFillColor(sf::Color::White);
 	m_text.setCharacterSize(35);
 	m_text.setOrigin(m_text.getGlobalBounds().width / 2, m_text.getGlobalBounds().height / 2);
-	m_text.setPosition(pos);	
-
+	m_text.setPosition(pos);
 }
 //=============================================================================
 void Button::draw(sf::RenderWindow& window)
@@ -27,18 +25,15 @@ void Button::draw(sf::RenderWindow& window)
 	window.draw(m_text);
 }
 //=============================================================================
-void Button::update(sf::Vector2f mousePos) //if theres a problem, maybe mouseWindow (not view)
+void Button::update(sf::Vector2f mousePos)
 {
 	m_state = Idle;
 
 	if (m_button.getGlobalBounds().contains(mousePos))
 	{
 		m_state = Hover;
-
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
-		{
 			m_state = clicked;
-		}
 	}
 	switch (m_state)
 	{
