@@ -47,7 +47,7 @@ private:
 	void HeroGlinda(GameObject* hero, GameObject* glinda) const;
 	void GlindaHero(GameObject* glinda, GameObject* hero) const;
 
-
+	void blockHero(GameObject* block, GameObject* hero) const;
 
 	std::unordered_map<Key, CorrectFunc, ArgsHash<std::type_index>, KeyEqual<std::type_index>> m_collisionFuncs;
 };

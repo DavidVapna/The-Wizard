@@ -10,13 +10,18 @@ public:
 
 	NPC(b2World* world, int bodyT, const sf::Vector2f& pos, bool rotation, const sf::Vector2f& size, int gameObj);
 	virtual ~NPC() = default;
-	void setAnimation(const sf::Vector2f& size, int theObject);
 	void update(const float& deltaTime);
-	void chat(Dorothy* dorothy);
-
-
+	void chat();
+	bool inChat() const;
+	void drawText(sf::RenderWindow& window);
+	bool isClickedOn();
 protected:
-	sf::Text text;
+	sf::RectangleShape m_textBG;
+	sf::Text m_text;
+	bool m_inChat = false;
+	std::vector<std::string > m_lines;
+	int m_currLine = 0;
+	int m_chatTimer = 0;
 
 private:
 };

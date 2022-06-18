@@ -45,6 +45,14 @@ void ContactListener::EndContact(b2Contact* contact)
     if (checkFootContact(fixDataA, -1, contactA) ||
         checkFootContact(fixDataB, -1, contactB))
         return;
+
+    if (contact->GetFixtureA()->GetFilterData().categoryBits == (uint16)CategoryBits::Block &&
+        contact->GetFixtureB()->GetFilterData().categoryBits == (uint16)CategoryBits::Enemy ||
+        contact->GetFixtureA()->GetFilterData().categoryBits == (uint16)CategoryBits::Block &&
+        contact->GetFixtureB()->GetFilterData().categoryBits == (uint16)CategoryBits::Enemy)
+    {
+        sendCollision(contactA, contactB);
+    }
 }
 //============================================================================
 

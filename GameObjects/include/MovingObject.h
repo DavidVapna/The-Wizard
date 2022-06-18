@@ -16,7 +16,6 @@ public:
 	void footContact(int val);
 
 private:
-	void setAnimation(const sf::Vector2f& size, int theObject) override;
 	virtual void updateAnimation(const float& deltaTime);
 
 protected:

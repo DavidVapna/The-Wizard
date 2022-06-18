@@ -8,7 +8,7 @@ class RandomEnemy : public Enemy
 public:
 
 	RandomEnemy(b2World* world, int bodyT, const sf::Vector2f& pos, bool rotation, const sf::Vector2f& size, int gameObj);
-	void wallCollision();
+	void changeDirection();
 
 
 private:

@@ -19,6 +19,9 @@ MultiMethod::MultiMethod()
 
     m_collisionFuncs[Key(typeid(Dorothy   ), typeid(Glinda))] = &MultiMethod::HeroGlinda;
     m_collisionFuncs[Key(typeid(Glinda ), typeid(Dorothy))] = &MultiMethod::GlindaHero;
+
+    m_collisionFuncs[Key(typeid(Dorothy), typeid(Block))] = &MultiMethod::blockHero;
+
 }
 //============================================================================
 void MultiMethod::DorothyRedHeels(GameObject* dorothy, GameObject* redHeels) const
@@ -40,14 +43,17 @@ void MultiMethod::redHeelsDorothy(GameObject* redHeels, GameObject* dorothy) con
 //============================================================================
 void MultiMethod::HeroGlinda(GameObject* hero, GameObject* glinda) const
 {
-    Dorothy* theHero = static_cast<Dorothy*>(hero);
-    Glinda* theGlinda = static_cast<Glinda*>(glinda);
-    if (!theHero || !glinda)
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
     {
-        //throw...
-        std::cout << "baddd" << "HERO RED HEELS MULTIMETHOD SETT THROW!!!";
+        Dorothy* theHero = static_cast<Dorothy*>(hero);
+        Glinda* theGlinda = static_cast<Glinda*>(glinda);
+        if (!theHero || !glinda)
+        {
+            //throw...
+            std::cout << "baddd" << "HERO RED HEELS MULTIMETHOD SETT THROW!!!";
+        }
+        theGlinda->chat();
     }
-    theGlinda->chat(theHero);
 }
 //============================================================================
 void MultiMethod::GlindaHero(GameObject* glinda, GameObject* hero) const
@@ -64,7 +70,7 @@ void MultiMethod::RandomEnemyBlock(GameObject* enemy, GameObject* block) const
         //throw...
         std::cout << "baddd" << "HERO RED HEELS MULTIMETHOD SETT THROW!!!";
     }
-    theEnemy->wallCollision();
+    theEnemy->changeDirection();
 }
 //============================================================================
 void MultiMethod::BlockRandomEnemy(GameObject* block, GameObject* enemy) const
@@ -95,5 +101,17 @@ void legsGround(GameObject* legs, GameObject* ground)
 void groundLegs(GameObject* ground, GameObject* legs)
 {
 
+}
+//============================================================================
+void MultiMethod::blockHero(GameObject* block, GameObject* hero) const
+{
+    Block* theEnemy = static_cast<Block*>(block);
+    Dorothy* theBlock = static_cast<Dorothy*>(hero);
+    if (!theEnemy || !theBlock)
+    {
+        //throw...
+        std::cout << "baddd" << "HERO RED HEELS MULTIMETHOD SETT THROW!!!";
+    }
+    std::cout << "hey";
 }
 //============================================================================

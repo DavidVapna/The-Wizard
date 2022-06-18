@@ -13,7 +13,6 @@ public:
 
 private:
 	void sendCollision(b2Body* contactA, b2Body* contactB);
-
 	bool checkFootContact(int fixtureUserData, int val, b2Body* body);
 
 

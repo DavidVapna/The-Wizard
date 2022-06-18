@@ -37,7 +37,11 @@ void GameBoard::draw()
     for (auto& staticObj : m_staticObjects)
         staticObj->draw(*m_window);
     for (auto& npc : m_npcObjects)
+    {
+        if (npc->inChat())
+            npc->drawText(*m_window);
         npc->draw(*m_window);
+    }
 
     m_hero->draw(*m_window);
 }

@@ -21,6 +21,19 @@
 #include <optional>
 #include <stack>
 //=============================================================================
+struct AnimationInfo
+{
+	sf::Vector2i frameStart;
+	sf::Vector2i frames;
+	sf::Vector2f frameSize;
+
+	AnimationInfo() = default;
+	AnimationInfo(sf::Vector2i start, sf::Vector2i total, sf::Vector2f size)
+		:frameStart(start), frames(total), frameSize(size) {}
+	AnimationInfo(AnimationInfo&&) = default;
+	AnimationInfo& operator=(AnimationInfo&&) = default;
+};
+//=============================================================================
 
 
 const int NUM_OF_MAPS = 1;
@@ -32,12 +45,10 @@ const int NUM_OF_MAPS = 1;
 constexpr auto SCALE = 30.f;
 constexpr auto JUMP = 7.5f;
 constexpr auto FEET_DATA = 3;
-constexpr auto JUMP_EPS = 0.1f;
 
 constexpr auto TIME_STEP = 1.0f / 60.0f;
 constexpr auto VELOCITY_ITERATOR = 6;
 constexpr auto POSITION_ITERATOR = 2;
-
 
 
 const sf::Vector2u MENU_SIZE(800, 800);
@@ -87,18 +98,11 @@ const auto BLOCK_SIZE = sf::Vector2f(GAME_SIZE.x / 10, GAME_SIZE.y / 10);
 //=============================================================================
 // ****************   ANIMATION SIZES   ***************
 //=============================================================================
-const auto LION_ANIM = sf::Vector2f(36.f, 73);
-const auto LION_ANIM_RECTS = sf::Vector2i(0, 4);
-
 
 //=============================================================================
 // ****************   TEXTS POSITIONS   ***************
 //=============================================================================
 const auto TITLE_POS = sf::Vector2f(MENU_SIZE.x / 2.f, MENU_SIZE.y * 0.1f);
-
-
-
-
 //=============================================================================
 enum class Textures
 {
@@ -111,10 +115,25 @@ enum class Textures
 	Block,
 	RedHeels,
 	PauseBG,
-	Mouse,
+	RandomEnemy,
 	Glinda,
 	
 	MaxTextures
+};
+//=============================================================================
+enum class Animations
+{
+	DOROTHY_IDLE_R,
+	DOROTHY_IDLE_L,
+	DOROTHY_JUMP_L,
+	DOROTHY_JUMP_R,
+	DOROTHY_WALK_L,
+	DOROTHY_WALK_R,
+	BLOCK,
+	Glinda,
+	RANDOM_L,
+	RANDOM_R,
+	REDHEELS,
 };
 //=============================================================================
 enum class Sounds
@@ -162,6 +181,7 @@ enum class CategoryBits
 	Enemy = 0x0020,
 	RedHeels = 0x0040,
 	Dorothy = 0x0080,
+	BodySensor = 0x0100,
 };
 
 //=============================================================================

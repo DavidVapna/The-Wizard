@@ -13,21 +13,17 @@ Movement::Movement(sf::Sprite* sprite, b2Body* body)
 //=============================================================================
 void Movement::move(const float& deltaTime)
 {
-	b2Vec2 vel = b2Vec2(toVector(m_direction).x * m_speed * deltaTime, (m_body)->GetLinearVelocity().y);
-	(m_body)->SetLinearVelocity(vel);
-	b2Vec2 position = (m_body)->GetPosition();
-	position *= SCALE;
-	m_sprite->setPosition(position.x, position.y);
+	b2Vec2 velocity = b2Vec2(toVector(m_direction).x * m_speed * deltaTime, m_body->GetLinearVelocity().y);
+	m_body->SetLinearVelocity(velocity);
+
+	b2Vec2 position = m_body->GetPosition();
+	m_sprite->setPosition(position.x * SCALE, position.y * SCALE);
 }
 //=============================================================================
 void Movement::jump(const float& deltaTime)
 {
 	float force = -m_body->GetMass() * JUMP;
 	m_body->ApplyLinearImpulse(b2Vec2(0, force), m_body->GetWorldCenter(), true);
-
-	//m_body->ApplyForce(b2Vec2(0, force), m_body->GetWorldCenter(), true);
-	//Resources::instance().playSound(Sounds::Jump);
-	//Resources::getResourceRef().playSound(jumpingSound);
 }
 //=============================================================================
 void Movement::setDirection(Direction dir)

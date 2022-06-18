@@ -2,6 +2,7 @@
 #include "Resources.h"
 //============================================================================
 using TexturesPair = std::pair<int, sf::Texture>;
+using AnimInfoPair = std::pair<int, AnimationInfo>;
 using ButtonPairStr = std::pair<int, int>;
 using FontPair = std::pair<int, sf::Font>;
 //============================================================================
@@ -14,6 +15,7 @@ Resources::Resources()
 	m_sounds((int)Sounds::MaxSounds), m_music()
 {
 	setTextures();
+	setAnimationInfo();
 	setButtonStrLengh();
 	setFonts();
 	setSounds();
@@ -30,20 +32,45 @@ const sf::Texture& Resources::getTexture(int wantedTexture) const
 	throw std::out_of_range("Texture not found.");
 }
 //============================================================================
+const AnimationInfo& Resources::getAnimInfo(int wantedInfo) const
+{
+	auto it = m_animInfo.find(wantedInfo);
+	if (it != m_animInfo.end())
+		return it->second;
+	throw std::out_of_range("Animation Info not found");
+}
+//============================================================================
 //sets all textures  of textures map
 void Resources::setTextures() 
 {
-	m_textures.insert(TexturesPair((int)Textures::MenuBG, loadSfObj<sf::Texture>("MenuBG.png")));
-	m_textures.insert(TexturesPair((int)Textures::GameBG, loadSfObj<sf::Texture>("GameState.png")));
-	m_textures.insert(TexturesPair((int)Textures::MenuButtons, loadSfObj<sf::Texture>("MenuButtons.png")));
-	m_textures.insert(TexturesPair((int)Textures::Buttons, loadSfObj<sf::Texture>("Buttons.jpg")));
-	m_textures.insert(TexturesPair((int)Textures::CowardlyLion, loadSfObj<sf::Texture>("CowardlyLion.png")));
-	m_textures.insert(TexturesPair((int)Textures::Dorothy, loadSfObj<sf::Texture>("Dorothy.png")));
-	m_textures.insert(TexturesPair((int)Textures::Block, loadSfObj<sf::Texture>("Hay.jpg")));
-	m_textures.insert(TexturesPair((int)Textures::RedHeels, loadSfObj<sf::Texture>("RedHeels.png")));
-	m_textures.insert(TexturesPair((int)Textures::Mouse, loadSfObj<sf::Texture>("Mouse.png")));
-	m_textures.insert(TexturesPair((int)Textures::Glinda, loadSfObj<sf::Texture>("Glinda.png")));
-	m_textures.insert(TexturesPair((int)Textures::PauseBG, loadSfObj<sf::Texture>("PauseBG.png")));
+	m_textures[(int)Textures::MenuBG		] = loadSfObj<sf::Texture>("MenuBG.png");
+	m_textures[(int)Textures::GameBG		] = loadSfObj<sf::Texture>("GameState.png");
+	m_textures[(int)Textures::MenuButtons	] = loadSfObj<sf::Texture>("MenuButtons.png");
+	m_textures[(int)Textures::Buttons	    ] = loadSfObj<sf::Texture>("Buttons.jpg");
+	m_textures[(int)Textures::CowardlyLion	] = loadSfObj<sf::Texture>("CowardlyLion.png");
+	m_textures[(int)Textures::Dorothy		] = loadSfObj<sf::Texture>("Dorothy.png");
+	m_textures[(int)Textures::Block			] = loadSfObj<sf::Texture>("Block.png");
+	m_textures[(int)Textures::RedHeels	    ] = loadSfObj<sf::Texture>("RedHeels.png");
+	m_textures[(int)Textures::RandomEnemy	] = loadSfObj<sf::Texture>("RandomEnemy.png");
+	m_textures[(int)Textures::Glinda		] = loadSfObj<sf::Texture>("Glinda.png");
+	m_textures[(int)Textures::PauseBG		] = loadSfObj<sf::Texture>("PauseBG.png");
+}
+//============================================================================
+void Resources::setAnimationInfo()
+{
+
+	m_animInfo[(int)Animations::DOROTHY_WALK_R] = AnimationInfo(sf::Vector2i(0, 0), sf::Vector2i(7, 0), sf::Vector2f(37.5f, 60));
+	m_animInfo[(int)Animations::DOROTHY_JUMP_R] = AnimationInfo(sf::Vector2i(0, 1), sf::Vector2i(7, 1), sf::Vector2f(37.5f, 60));
+	m_animInfo[(int)Animations::DOROTHY_IDLE_R] = AnimationInfo(sf::Vector2i(0, 2), sf::Vector2i(6, 2), sf::Vector2f(37.5f, 60));
+	m_animInfo[(int)Animations::DOROTHY_WALK_L] = AnimationInfo(sf::Vector2i(0, 3), sf::Vector2i(7, 3), sf::Vector2f(37.5f, 60));
+	m_animInfo[(int)Animations::DOROTHY_JUMP_L] = AnimationInfo(sf::Vector2i(0, 4), sf::Vector2i(7, 4), sf::Vector2f(37.5f, 60));
+	m_animInfo[(int)Animations::DOROTHY_IDLE_L] = AnimationInfo(sf::Vector2i(0, 5), sf::Vector2i(6, 5), sf::Vector2f(37.5f, 60));
+
+	m_animInfo[(int)Animations::BLOCK		  ] = AnimationInfo(sf::Vector2i(0, 0), sf::Vector2i(0, 0), sf::Vector2f(1280.f, 668.f));
+	m_animInfo[(int)Animations::Glinda		  ] = AnimationInfo(sf::Vector2i(0, 10), sf::Vector2i(8, 10), sf::Vector2f(64.f, 64.f));
+	m_animInfo[(int)Animations::RANDOM_L	  ] = AnimationInfo(sf::Vector2i(0, 1), sf::Vector2i(3, 1), sf::Vector2f(48.f, 48.f));
+	m_animInfo[(int)Animations::RANDOM_R	  ] = AnimationInfo(sf::Vector2i(0, 2), sf::Vector2i(3, 2), sf::Vector2f(48.f, 48.f));
+	m_animInfo[(int)Animations::REDHEELS	  ] = AnimationInfo(sf::Vector2i(0, 0), sf::Vector2i(0, 0), sf::Vector2f(360.f, 360.f));
 }
 //============================================================================
 //sets the butten len based on the string len

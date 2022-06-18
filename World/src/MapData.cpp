@@ -83,7 +83,7 @@ void MapData::mapStringToInt()
     m_stringTextures["Dorothy"] = (int)Textures::Dorothy;
     m_stringTextures["Block"] = (int)Textures::Block;
     m_stringTextures["RedHeels"] = (int)Textures::RedHeels;
-    m_stringTextures["Mouse"] = (int)Textures::Mouse;
+    m_stringTextures["RandomEnemy"] = (int)Textures::RandomEnemy;
 }
 //=============================================================================
 std::unique_ptr<Hero> MapData::createHero(b2World& world, int currMap)

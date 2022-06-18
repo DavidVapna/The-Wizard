@@ -3,6 +3,8 @@
 //============================================================================
 #include "Macros.h"
 //=============================================================================
+
+//=============================================================================
 class Resources 
 {
 public:
@@ -12,10 +14,9 @@ public:
 	const sf::Font& getFont(int index) const;
 	void playMusic(Sounds sound);
 	void playSound(Sounds sound);
-
 	const int getButLen(int index) const;
 	void stopMusic();
-
+	const AnimationInfo& getAnimInfo(int wantedInfo) const;
 
 private:
 
@@ -24,14 +25,16 @@ private:
 	Resources& operator=(const Resources&) = default;
 
 	void setTextures();
+	void setAnimationInfo();
 	void setFonts();
 	void setSounds();
 	void setButtonStrLengh();
 
 private:
+	std::unordered_map <int, AnimationInfo> m_animInfo;
 	std::unordered_map <int, sf::Texture> m_textures;
-	std::unordered_map<int, sf::Font> m_fonts;
-	std::unordered_map<int, int> m_buttonStrLen;
+	std::unordered_map <int, sf::Font> m_fonts;
+	std::unordered_map <int, int> m_buttonStrLen;
 	std::unordered_map <int, sf::SoundBuffer> m_sounds;
 	sf::Sound m_sound;
 	sf::Music m_music;

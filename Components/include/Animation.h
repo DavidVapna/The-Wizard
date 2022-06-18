@@ -6,23 +6,27 @@
 class AnimationComp
 {
 public:
-
-    AnimationComp(sf::Sprite& sprite, const sf::Texture* texture ,float animTimer,
-        const sf::Vector2i& frameStart, const sf::Vector2i& frames, sf::Vector2f size)
-        :m_sprite(sprite), m_textureSheet(texture), m_animTimer(animTimer),
-        m_timer(0.f), m_size(size), m_done(false)
+    //const sf::Vector2i& frames, const sf::Vector2i& frameStart, sf::Vector2f size
+    AnimationComp(sf::Sprite& sprite, float animTimer, const AnimationInfo& animInfo, const sf::Vector2f& objSize)
+        :m_sprite(sprite), m_animTimer(animTimer),
+        m_timer(0.f), m_size(animInfo.frameSize), m_done(false)
     {
-        m_startRect = sf::IntRect(frameStart.x * size.x, frameStart.y * size.y, size.x, size.y);
+        //(animInfo.frames.x == 1 && animInfo.frames.y == 0) ? m_static = true : m_static = false;
+            
+        m_startRect = sf::IntRect(animInfo.frameStart.x * m_size.x, animInfo.frameStart.y * m_size.y, m_size.x, m_size.y);
         m_currentRect = m_startRect;
-        m_endRect = sf::IntRect(frames.x * size.x, frames.y * size.y, size.x, size.y);
+        m_endRect = sf::IntRect(animInfo.frames.x * m_size.x, animInfo.frames.y * m_size.y, m_size.x, m_size.y);
 
-        m_sprite.setTexture(*m_textureSheet, true);
         m_sprite.setTextureRect(m_startRect);
+        m_sprite.setScale(objSize.x / m_sprite.getTextureRect().width, objSize.y / m_sprite.getTextureRect().height);
+        //m_sprite.setScale(objSize.x / m_sprite.getGlobalBounds().width, objSize.y / m_sprite.getGlobalBounds().height);
+        m_sprite.setOrigin(m_sprite.getTextureRect().width / 2.f, m_sprite.getTextureRect().height / 2.f);
     }
 
-    //functions
     void play(const float& deltaTime)
     {
+        //if (m_static) return;
+
         m_done = false;
         m_timer += 100.f * deltaTime;
         if (m_timer >= m_animTimer)
@@ -30,9 +34,7 @@ public:
             m_timer = 0.f;
 
             if (m_currentRect != m_endRect)
-            {
                 m_currentRect.left += m_size.x;
-            }
             else
             {
                 m_currentRect.left = m_startRect.left;
@@ -46,13 +48,11 @@ public:
         m_timer = 0.f;
         m_currentRect = m_startRect;
     }
-
     ~AnimationComp() = default;
 
 public:
     //members
     sf::Sprite& m_sprite;
-    const sf::Texture* m_textureSheet;
     float m_animTimer;
     float m_timer;
     sf::IntRect m_startRect;
@@ -60,24 +60,21 @@ public:
     sf::IntRect m_endRect;
     sf::Vector2f m_size;
     bool m_done;
+   // bool m_static;
 };
-
 //=============================================================================
 class Animation
 {
 public:
-    Animation(sf::Sprite& sprite, const sf::Texture& texture);
+    Animation(sf::Sprite& sprite);
     ~Animation() = default;
 
     //functions
-    void addAnimation(const std::string& key, float animTimer,
-        const sf::Vector2i& frameStart, const sf::Vector2i& frames, sf::Vector2f size);
+    void addAnimation(const std::string& key, float animTimer, const AnimationInfo& animInfo, const sf::Vector2f& objSize);
     void play(const std::string& key, const float& deltaTime);
 
 private:
-    
     std::map<std::string, std::unique_ptr<AnimationComp>> m_animations;
     sf::Sprite& m_sprite;
-    const sf::Texture* m_textureSheet;
 };
 //=============================================================================

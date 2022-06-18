@@ -29,6 +29,7 @@ public:
 	void updateView();
 
 private:
+
 	b2World m_world;
 	GameBoard m_gameBoard;
 	ContactListener m_contactListener;

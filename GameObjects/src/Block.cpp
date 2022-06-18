@@ -14,6 +14,7 @@ Block::Block(b2World* world, int bodyT, const sf::Vector2f& pos,
 	shape.SetAsBox((size.x / 2.f) / SCALE, (size.y / 2.f) / SCALE);
 	setFixture(shape, 1.f, 1.f, 0.f, (uint16)CategoryBits::Block, 0xFFFF, false);
 	m_body->GetUserData().pointer = reinterpret_cast<uintptr_t>(this);
+	m_animation->addAnimation("Default", 100.f, Resources::instance().getAnimInfo((int)Animations::BLOCK), size);
 }
 //=============================================================================
 

@@ -72,7 +72,6 @@ void GameState::setBoundries()
     b2FixtureDef fixture;
     fixture.shape = &screenBorderShape;
     fixture.friction = 1.f;
-    fixture.filter.categoryBits = ((uint16)CategoryBits::Boundries);
 
 
     screenBorderShape.SetTwoSided(topLeftCorner, topRightCorner);
@@ -114,14 +113,7 @@ void GameState::updateInput(const float& deltaTime)
         Resources::instance().stopMusic();
         return;
     }
-    for (auto event = sf::Event{}; m_window->pollEvent(event);)
-    {
-        switch (event.type)
-        {
-        case sf::Event::Closed:
-            this->m_end = true; break;
-        }
-    }
+
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::P))
     {
         if (!m_pause)

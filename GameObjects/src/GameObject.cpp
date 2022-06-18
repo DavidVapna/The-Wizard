@@ -1,13 +1,19 @@
 //=============================================================================
 #include "GameObject.h"
 //=============================================================================
-GameObject::GameObject(b2World* world, int bodyT, const sf::Vector2f& pos,
-	bool rotation, const sf::Vector2f& size)
+GameObject::GameObject(b2World* world, int bodyT, const sf::Vector2f& pos, bool rotation,
+	const sf::Vector2f& size, int gameObj)
 	:m_colided(false), m_removed(false)
 {
 	b2BodyDef bodyDef;
 	setBody(bodyDef, bodyT, pos, rotation);
 	m_body = world->CreateBody(&bodyDef);
+
+
+	m_sprite.setTexture(Resources::instance().getTexture(gameObj));
+
+
+	m_animation = std::make_unique<Animation>(m_sprite);
 }
 //=============================================================================
 void GameObject::setBody(b2BodyDef& objBody, int bodyT, const sf::Vector2f& pos, bool rotation)
@@ -33,6 +39,8 @@ void GameObject::setFixture(b2PolygonShape& shape, float density, float friction
 	fixtureDef.userData.pointer = data;
 	m_body->CreateFixture(&fixtureDef);
 }
+//=============================================================================
+
 //=============================================================================
 sf::Vector2f GameObject::getPos() const
 {
@@ -63,4 +71,3 @@ void GameObject::disable()
 {
 	m_body->SetEnabled(false);
 }
-//=============================================================================

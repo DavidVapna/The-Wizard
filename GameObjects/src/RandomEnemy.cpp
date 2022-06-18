@@ -13,9 +13,13 @@ RandomEnemy::RandomEnemy(b2World* world, int bodyT, const sf::Vector2f& pos, boo
 {
 	m_moveComp = std::make_unique<RandomMovement>(&m_sprite, m_body);
 	m_body->GetUserData().pointer = reinterpret_cast<uintptr_t>(this);
+	m_animation->addAnimation("WalkL", 100.f, Resources::instance().getAnimInfo((int)Animations::RANDOM_L), size);
+	m_animation->addAnimation("WalkR", 100.f, Resources::instance().getAnimInfo((int)Animations::RANDOM_R), size);
+	m_animation->addAnimation("IdleL", 100.f, Resources::instance().getAnimInfo((int)Animations::RANDOM_R), size);
+
 }
 //=============================================================================
-void RandomEnemy::wallCollision()
+void RandomEnemy::changeDirection()
 {
 	auto* temp = static_cast<RandomMovement*>(m_moveComp.get());
 	if (!temp)

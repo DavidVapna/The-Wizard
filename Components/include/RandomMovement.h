@@ -12,5 +12,6 @@ public:
 
 private:
 	bool m_wallCollided;
+	int m_stepsCounter;
 };
 //=============================================================================
