@@ -9,4 +9,5 @@
 											  "Dorothy.cpp"
 											  "Glinda.cpp"
 											  "NPC.cpp"
+											  "Portal.cpp"
 											  )

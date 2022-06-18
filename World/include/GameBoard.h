@@ -28,5 +28,6 @@ private:
 	sf::RenderWindow* m_window;
 	int m_mapIndex;
 	MapData m_maps;
+	bool m_nextMap;
 };
 //=============================================================================

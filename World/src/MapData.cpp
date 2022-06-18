@@ -18,7 +18,6 @@ void MapData::loadMap(int map)
     std::vector<ObjectInfo> staticObjs, movingObjs, npcObjs;
 
 
-    std::getline(data, streamLine);
     loadFromFile(data, streamLine, map, staticObjs, movingObjs, npcObjs);
 
     m_static.push_back(staticObjs);

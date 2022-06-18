@@ -21,10 +21,6 @@ Button::Button(sf::Vector2f pos, sf::Vector2f size, std::string text,
 
 }
 //=============================================================================
-Button::~Button()
-{
-}
-//=============================================================================
 void Button::draw(sf::RenderWindow& window)
 {
 	window.draw(m_button);

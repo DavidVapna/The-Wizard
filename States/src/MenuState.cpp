@@ -37,11 +37,11 @@ void MenuState::setBG()
 //=============================================================================
 void MenuState::setButtons()
 {
-    m_buttons[Play_B] = std::make_unique<Button>
+    m_buttons[(int)MenuButtons::Play_B] = std::make_unique<Button>
         (PLAY_POS, BUTTONS_SIZE, PLAY_TEXT, sf::Color::Red, sf::Color::Yellow, sf::Color::Green);
-    m_buttons[Help_B] = std::make_unique<Button>
+    m_buttons[(int)MenuButtons::Help_B] = std::make_unique<Button>
         (HELP_POS, BUTTONS_SIZE, HELP_TEXT, sf::Color::Red, sf::Color::Yellow, sf::Color::Green);
-    m_buttons[Quit_B] = std::make_unique<Button>
+    m_buttons[(int)MenuButtons::Quit_B] = std::make_unique<Button>
         (QUIT_POS, BUTTONS_SIZE, QUIT_TEXT, sf::Color::Red, sf::Color::Yellow, sf::Color::Green);
 }
 //=============================================================================

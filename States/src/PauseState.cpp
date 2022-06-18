@@ -9,18 +9,19 @@ PauseState::PauseState(sf::RenderWindow* window, std::stack<std::unique_ptr<Stat
 	setButtons();
 }
 //=============================================================================
-void PauseState::setBG()
-{
-	m_backGround.setTexture(
-		Resources::instance().getTexture(int(Textures::PauseBG)));
-	sf::Vector2f bgScale = sf::Vector2f(static_cast<float>(m_window->getSize().x),
-							static_cast<float>(m_window->getSize().y));
-	m_backGround.setScale(bgScale);
-}
-//=============================================================================
 void PauseState::setButtons()
 {
-	return;
+	//auto temp = std::make_unique<Button>
+	//	(CONTINUE_BUTTON, BUTTONS_SIZE, CONTINUE_TEXT, sf::Color::Red, sf::Color::Yellow, sf::Color::Green);
+
+	//this->m_buttons.emplace((int)PauseButtons::Continue, temp.release());
+}
+//=============================================================================
+void PauseState::setBG()
+{
+	m_backGround.setTexture(Resources::instance().getTexture((int)Textures::PauseBG));
+	auto size = m_backGround.getTexture()->getSize();
+	m_backGround.scale(sf::Vector2f(m_window->getSize().x / size.x, m_window->getSize().y / size.y));
 }
 //=============================================================================
 void PauseState::setWindow()
@@ -40,13 +41,16 @@ void PauseState::draw()
 //=============================================================================
 void PauseState::update(const float& deltaTime)
 {
-	return;
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape))
+	{
+		this->m_end = true;
+		return;
+	}
 }
 //=============================================================================
 void PauseState::updateInput(const float& deltaTime)
 {
 	return;
 }
-//=============================================================================
 
 //=============================================================================

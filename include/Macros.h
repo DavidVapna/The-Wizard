@@ -55,7 +55,7 @@ const sf::Vector2u MENU_SIZE(800, 800);
 const sf::Vector2u GAME_SIZE(1500, 800);
 
 const sf::Vector2i MENU_POS(500, 130);
-const sf::Vector2i GAME_POS(350, 50);
+const sf::Vector2i GAME_POS(-2000, 150);
 
 //=============================================================================
 //		*****************   BUTTONS    *******************
@@ -70,6 +70,8 @@ const sf::Vector2f QUIT_POS(MENU_SIZE.x / 2.f, MENU_SIZE.y * (6.f/7.f));
 
 const sf::Vector2f HERO_START(20.f, GAME_SIZE.y - 20);
 
+const sf::Vector2f CONTINUE_BUTTON(400.f, 400.f);
+
 
 //=============================================================================
 //		*****************   TEXTS    *******************
@@ -78,6 +80,9 @@ constexpr auto PLAY_TEXT("Play");
 constexpr auto QUIT_TEXT("Exit");
 constexpr auto HELP_TEXT("Help");
 constexpr auto TITLE_TEXT("THE WIZARD");
+
+constexpr auto CONTINUE_TEXT("Conitune");
+
 
 //=============================================================================
 //		*****************   Colors    *******************
@@ -94,7 +99,8 @@ const auto BLOCK_SIZE = sf::Vector2f(GAME_SIZE.x / 10, GAME_SIZE.y / 10);
 //=============================================================================
 // 
 //=============================================================================
-
+enum class PauseButtons { Continue };
+enum MenuButtons { Play_B, Quit_B, Help_B };
 //=============================================================================
 // ****************   ANIMATION SIZES   ***************
 //=============================================================================
@@ -183,6 +189,7 @@ enum class CategoryBits
 	RedHeels = 0x0040,
 	Dorothy = 0x0080,
 	BodySensor = 0x0100,
+	PortalSensor = 0x0200,
 };
 
 //=============================================================================

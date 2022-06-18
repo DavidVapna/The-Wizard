@@ -3,7 +3,7 @@
 
 //=============================================================================
 GameBoard::GameBoard(sf::RenderWindow* window, b2World* world)
-    :m_window(window), m_world(world), m_mapIndex(0)
+    :m_window(window), m_world(world), m_mapIndex(0), m_nextMap(false)
 {
 
 }
@@ -49,6 +49,8 @@ void GameBoard::draw()
 void GameBoard::update(const float& deltaTime)
 {
     m_hero->update(deltaTime);
+    if(m_hero->nextMap())
+        m_nextMap = true;
     for (auto& movingObj : m_movingObjects)
         movingObj->update(deltaTime);
     for (auto& staticObj : m_staticObjects)

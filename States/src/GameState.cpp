@@ -3,7 +3,6 @@
 #include <format>
 //=============================================================================
 #include "GameState.h"
-#include "PauseState.h"
 //=============================================================================
 GameState::GameState(sf::RenderWindow* window, std::stack<std::unique_ptr<State>>* states)
     :State(window, states),
@@ -11,7 +10,7 @@ GameState::GameState(sf::RenderWindow* window, std::stack<std::unique_ptr<State>
     m_gameBoard(m_window, &m_world),
     m_debugMouse("", Resources::instance().getFont(Fonts::Bold_F))
 {
-    m_debugMouse.setFillColor(sf::Color::Yellow);
+    m_debugMouse.setFillColor(sf::Color::Red);
 
 
     m_world.SetContactListener(&m_contactListener);

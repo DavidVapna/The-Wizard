@@ -26,7 +26,7 @@ public:
     void play(const float& deltaTime)
     {
         //if (m_static) return;
-
+        return;
         m_done = false;
         m_timer += 100.f * deltaTime;
         if (m_timer >= m_animTimer)

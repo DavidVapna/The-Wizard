@@ -6,7 +6,6 @@
 //=============================================================================
 class State
 {
-	//public functions.
 public:
 	State(sf::RenderWindow* window,	std::stack<std::unique_ptr<State>>* m_states);
 	virtual ~State();
@@ -18,12 +17,10 @@ public:
 	virtual void updateInput(const float& deltaTime) = 0;
 	virtual void setButtons() = 0;
 
+
 	virtual bool isEnd() const;
 	virtual void updateMouse();
 
-
-	//protected functions.
-protected:
 
 protected:
 	sf::RenderWindow* m_window;
@@ -38,6 +35,7 @@ protected:
 
 	std::stack<std::unique_ptr<State>> *m_states;
 
+	float m_timer;
 private:
 };
 //=============================================================================

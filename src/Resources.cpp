@@ -69,8 +69,8 @@ void Resources::setAnimationInfo()
 
 	m_animInfo[(int)Animations::BLOCK		  ] = AnimationInfo(sf::Vector2i(0, 0), sf::Vector2i(0, 0), sf::Vector2f(1280.f, 668.f));
 	m_animInfo[(int)Animations::Glinda		  ] = AnimationInfo(sf::Vector2i(0, 10), sf::Vector2i(8, 10), sf::Vector2f(64.f, 64.f));
-	m_animInfo[(int)Animations::RANDOM_L	  ] = AnimationInfo(sf::Vector2i(0, 1), sf::Vector2i(3, 1), sf::Vector2f(48.f, 48.f));
-	m_animInfo[(int)Animations::RANDOM_R	  ] = AnimationInfo(sf::Vector2i(0, 2), sf::Vector2i(3, 2), sf::Vector2f(48.f, 48.f));
+	m_animInfo[(int)Animations::RANDOM_L	  ] = AnimationInfo(sf::Vector2i(0, 0), sf::Vector2i(3, 0), sf::Vector2f(46.75f, 33.f));
+	m_animInfo[(int)Animations::RANDOM_R	  ] = AnimationInfo(sf::Vector2i(0, 1), sf::Vector2i(3, 1), sf::Vector2f(46.75f, 33.f));
 	m_animInfo[(int)Animations::REDHEELS	  ] = AnimationInfo(sf::Vector2i(0, 0), sf::Vector2i(0, 0), sf::Vector2f(360.f, 360.f));
 }
 //============================================================================

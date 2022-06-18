@@ -3,11 +3,13 @@
 //=============================================================================
 #include "State.h"
 //=============================================================================
+
+//=============================================================================
 class PauseState : public State
 {
 public:
 	PauseState(sf::RenderWindow* window, std::stack<std::unique_ptr<State>>* states);
-
+	virtual ~PauseState() = default; 
 
 	virtual void setBG() override;
 	virtual void setWindow() override;
