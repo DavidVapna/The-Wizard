@@ -7,8 +7,7 @@ template<class T>
 class Factory
 {
 public:
-	using pFnc = std::unique_ptr<T>(*)
-				(b2World*, int, const sf::Vector2f&, bool, const sf::Vector2f& , int);
+	using pFnc = std::unique_ptr<T>(*) (b2World*, int, const sf::Vector2f&, bool, const sf::Vector2f& , int);
 	static std::unique_ptr<T> create(b2World* world, ObjectInfo& info, int gameObj);
 	static bool registerit(const std::string& name, pFnc);
 

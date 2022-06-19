@@ -10,6 +10,8 @@ PlayerMovement::PlayerMovement(sf::Sprite* sprite, b2Body* body, int* numFootCon
 //=============================================================================
 void PlayerMovement::update(const float& deltaTime)
 {
+
+	setIdle();
 	m_jumpTimeout--;
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left) ||

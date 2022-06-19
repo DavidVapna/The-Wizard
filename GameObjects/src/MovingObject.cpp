@@ -14,7 +14,6 @@ MovingObject::MovingObject(b2World* world, int bodyT, const sf::Vector2f& pos,
 //=============================================================================
 void MovingObject::update(const float& deltaTime)
 {
-	m_moveComp->setIdle();
 	m_moveComp->update(deltaTime);
 	m_moveComp->move(deltaTime);
 	updateAnimation(deltaTime);

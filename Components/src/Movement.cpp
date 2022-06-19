@@ -8,7 +8,7 @@ Movement::Movement(sf::Sprite* sprite, b2Body* body)
 //=============================================================================
 void Movement::move(const float& deltaTime)
 {
-	m_isJumping = m_body->GetLinearVelocity().y > 0.5;
+	//m_isJumping = m_body->GetLinearVelocity().y > 0.5;
 	b2Vec2 velocity = b2Vec2(toVector(m_direction).x * m_speed * deltaTime, m_body->GetLinearVelocity().y);
 	m_body->SetLinearVelocity(velocity);
 

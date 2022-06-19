@@ -35,7 +35,7 @@ const sf::Vector2u MENU_SIZE(800, 800);
 const sf::Vector2u GAME_SIZE(1500, 800);
 
 const sf::Vector2i MENU_POS(500, 130);
-const sf::Vector2i GAME_POS(-2000, 150);
+const sf::Vector2i GAME_POS(200, 150);
 
 //=============================================================================
 //		*****************   BUTTONS    *******************

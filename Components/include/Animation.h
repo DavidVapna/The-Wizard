@@ -17,20 +17,18 @@ public:
 
         m_sprite.setTextureRect(m_startRect);
         m_sprite.setScale(objSize.x / m_sprite.getTextureRect().width, objSize.y / m_sprite.getTextureRect().height);
-        //m_sprite.setScale(objSize.x / m_sprite.getGlobalBounds().width, objSize.y / m_sprite.getGlobalBounds().height);
         m_sprite.setOrigin(m_sprite.getTextureRect().width / 2.f, m_sprite.getTextureRect().height / 2.f);
     }
 
     void play(const float& deltaTime)
     {
-        return;
         m_done = false;
         m_timer += 100.f * deltaTime;
         if (m_timer >= m_animTimer)
         {
             m_timer = 0.f;
 
-            if (m_currentRect != m_endRect)
+            if (m_currentRect.left < m_endRect.left)
                 m_currentRect.left += m_size.x;
             else
             {

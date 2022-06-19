@@ -12,14 +12,14 @@ using Key = std::pair<std::type_index, std::type_index>;
 //============================================================================
 MultiMethod::MultiMethod()
 {
-    m_collisionFuncs[Key(typeid(Dorothy ), typeid(RedHeels))] = &MultiMethod::DorothyRedHeels;
-    m_collisionFuncs[Key(typeid(RedHeels), typeid(Dorothy ))] = &MultiMethod::redHeelsDorothy;
-    m_collisionFuncs[Key(typeid(RandomEnemy), typeid(Block   ))] = &MultiMethod::RandomEnemyBlock;
-    m_collisionFuncs[Key(typeid(Block   ), typeid(RandomEnemy))] = &MultiMethod::BlockRandomEnemy;
-    m_collisionFuncs[Key(typeid(Dorothy), typeid(Block))] = &MultiMethod::blockHero;
-    m_collisionFuncs[Key(typeid(Hero), typeid(Portal))] = &MultiMethod::HeroPortal;
-    m_collisionFuncs[Key(typeid(Dorothy), typeid(Portal))] = &MultiMethod::HeroPortal;
-    m_collisionFuncs[Key(typeid(Portal), typeid(Hero))] = &MultiMethod::PortalHero;
+    m_collisionFuncs[Key(typeid(Dorothy    ), typeid(RedHeels   ))] = &MultiMethod::DorothyRedHeels;
+    m_collisionFuncs[Key(typeid(RedHeels   ), typeid(Dorothy    ))] = &MultiMethod::redHeelsDorothy;
+    m_collisionFuncs[Key(typeid(RandomEnemy), typeid(Block      ))] = &MultiMethod::RandomEnemyBlock;
+    m_collisionFuncs[Key(typeid(Block      ), typeid(RandomEnemy))] = &MultiMethod::BlockRandomEnemy;
+    m_collisionFuncs[Key(typeid(Dorothy    ), typeid(Block      ))] = &MultiMethod::blockHero;
+    m_collisionFuncs[Key(typeid(Hero       ), typeid(Portal     ))] = &MultiMethod::HeroPortal;
+    m_collisionFuncs[Key(typeid(Dorothy    ), typeid(Portal     ))] = &MultiMethod::HeroPortal;
+    m_collisionFuncs[Key(typeid(Portal     ), typeid(Hero       ))] = &MultiMethod::PortalHero;
 }
 //============================================================================
 void MultiMethod::DorothyRedHeels(GameObject* dorothy, GameObject* redHeels) const

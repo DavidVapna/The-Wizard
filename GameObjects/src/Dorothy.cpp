@@ -16,11 +16,11 @@ Dorothy::Dorothy(b2World* world, int bodyT, const sf::Vector2f& pos,
 					  | (uint16)CategoryBits::Dorothy, 0xFFFF, false);
 	m_body->GetUserData().pointer = reinterpret_cast<uintptr_t>(this);
 	
-	m_animation->addAnimation("IdleL", 100.f, Resources::instance().getAnimInfo((int)Animations::DOROTHY_IDLE_L), size);
-	m_animation->addAnimation("IdleR", 100.f, Resources::instance().getAnimInfo((int)Animations::DOROTHY_IDLE_R), size);
-	m_animation->addAnimation("WalkL", 100.f, Resources::instance().getAnimInfo((int)Animations::DOROTHY_WALK_L), size);
-	m_animation->addAnimation("WalkR", 100.f, Resources::instance().getAnimInfo((int)Animations::DOROTHY_WALK_R), size);
-	m_animation->addAnimation("JumpL", 100.f, Resources::instance().getAnimInfo((int)Animations::DOROTHY_JUMP_L), size);
-	m_animation->addAnimation("JumpR", 100.f, Resources::instance().getAnimInfo((int)Animations::DOROTHY_JUMP_R), size);
+	m_animation->addAnimation("IdleL", 50.f, Resources::instance().getAnimInfo((int)Animations::DOROTHY_IDLE_L), size);
+	m_animation->addAnimation("IdleR", 50.f, Resources::instance().getAnimInfo((int)Animations::DOROTHY_IDLE_R), size);
+	m_animation->addAnimation("WalkL", 50.f, Resources::instance().getAnimInfo((int)Animations::DOROTHY_WALK_L), size);
+	m_animation->addAnimation("WalkR", 50.f, Resources::instance().getAnimInfo((int)Animations::DOROTHY_WALK_R), size);
+	m_animation->addAnimation("JumpL", 50.f, Resources::instance().getAnimInfo((int)Animations::DOROTHY_JUMP_L), size);
+	m_animation->addAnimation("JumpR", 50.f, Resources::instance().getAnimInfo((int)Animations::DOROTHY_JUMP_R), size);
 }
 //=============================================================================
